@@ -147,6 +147,43 @@
   .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,80px);background:#1d4a2c;color:#eaf2e6;padding:12px 20px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 18px 44px -14px rgba(22,54,33,.6);z-index:99;transition:transform .35s cubic-bezier(.2,.7,.3,1.1);opacity:0;pointer-events:none}
   .toast.show{transform:translate(-50%,0);opacity:1}
 
+  /* item modal */
+  .item{cursor:pointer}
+  .modal-overlay{position:fixed;inset:0;background:rgba(18,24,20,.55);backdrop-filter:blur(6px);z-index:80;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .modal-overlay.open{opacity:1;pointer-events:auto}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:26px;max-width:940px;width:100%;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;transform:translateY(18px) scale(.97);transition:transform .3s cubic-bezier(.2,.7,.3,1.15);box-shadow:0 60px 120px -40px rgba(12,18,14,.6)}
+  .modal-overlay.open .modal{transform:none}
+  .modal-top{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--border);flex:none}
+  .modal-nav{display:flex;align-items:center;gap:6px;color:var(--faint);font-size:12.5px;font-weight:600}
+  .modal-nav .navbtn{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s;font-size:16px;color:var(--muted)}
+  .modal-nav .navbtn:hover{border-color:var(--primary);color:var(--primary)}
+  .modal-top .crumb-m{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);min-width:0}
+  .modal-top .crumb-m a{font-weight:700;color:var(--primary)}
+  .modal-top .crumb-m a:hover{text-decoration:underline}
+  .modal-top .crumb-m .sep{opacity:.4}
+  .modal-close{margin-left:auto;width:36px;height:36px;border-radius:12px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--muted);transition:.15s;flex:none}
+  .modal-close:hover{border-color:#c05a4a;color:#b03a2a}
+  .modal-body{overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;min-height:0}
+  .modal-art{position:relative;background:var(--surface-2);min-height:380px}
+  .modal-art img.main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .modal-art .cond-big{position:absolute;top:14px;left:14px;font-size:11px;font-weight:800;letter-spacing:.04em;background:rgba(253,251,244,.94);color:#1d4a2c;border-radius:999px;padding:4px 11px;backdrop-filter:blur(3px)}
+  .modal-art .img-count{position:absolute;bottom:14px;right:14px;font-size:11px;font-weight:700;background:rgba(18,24,20,.55);color:#f4f1e6;border-radius:999px;padding:3px 10px;backdrop-filter:blur(3px)}
+  .modal-art .star-big{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(253,251,244,.94);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.15s;backdrop-filter:blur(3px)}
+  .modal-art .star-big:hover{transform:scale(1.1)}
+  .modal-art .star-big.on{background:#f7ecd2}
+  .modal-info{padding:30px 34px 26px;display:flex;flex-direction:column;gap:0}
+  .modal-info .mi-kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .modal-info h3{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,2.6vw,32px);line-height:1.12;margin-top:8px;letter-spacing:-.015em}
+  .modal-info .mi-sub{color:var(--muted);font-size:14px;margin-top:4px}
+  .modal-info .mi-story{margin-top:16px;color:var(--muted);font-size:14.5px;line-height:1.7;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:14px;font-style:italic}
+  .mi-fields{margin-top:18px;display:flex;flex-direction:column}
+  .mi-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:10px 2px;border-bottom:1px solid color-mix(in srgb,var(--border) 55%,transparent);font-size:14px}
+  .mi-row:last-child{border-bottom:none}
+  .mi-row .lbl{color:var(--faint);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex:none}
+  .mi-row .val{font-weight:600;text-align:right}
+  .mi-row .val.accent{color:#7a4a24}
+  .modal-info .mi-actions{margin-top:auto;padding-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  @media(max-width:760px){.modal-body{grid-template-columns:1fr}.modal-art{min-height:240px}}
   @media(max-width:1000px){.items{grid-template-columns:repeat(3,1fr)}.featured{grid-template-columns:1fr}.nav-links{display:none}.banner{height:390px}}
   @media(max-width:720px){.items{grid-template-columns:1fr 1fr}}
   @media(max-width:520px){.items{grid-template-columns:1fr}.soc-left{width:100%}}
@@ -283,6 +320,47 @@
   </div>
 </footer>
 
+<!-- Item detail modal -->
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <div class="modal-nav">
+        <button class="navbtn" id="prevBtn" aria-label="Previous item">‹</button>
+        <span id="posLabel">1 of 38</span>
+        <button class="navbtn" id="nextBtn" aria-label="Next item">›</button>
+      </div>
+      <div class="crumb-m"><a href="#">@solecollector</a><span class="sep">/</span><span>Jordan Wall</span><span class="sep">·</span><span id="modalPos">Recent additions</span></div>
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-art">
+        <img class="main" id="mImg" src="" alt="">
+        <span class="cond-big" id="mCond">DS</span>
+        <span class="img-count" id="mCount">1/1</span>
+        <button class="star-big" id="mStar">☆</button>
+      </div>
+      <div class="modal-info">
+        <span class="mi-kicker" id="mKicker">Sneaker · #4 grail</span>
+        <h3 id="modalTitle">Air Jordan 4 Retro — "Bred" 2019</h3>
+        <div class="mi-sub" id="mSub">US 10 · added 14 Mar 2024</div>
+        <div class="mi-story" id="mStory">“The pair that started the wall. DS, original box and laces, bought on release day for retail — and still the crown jewel.”</div>
+        <div class="mi-fields">
+          <div class="mi-row"><span class="lbl">Condition</span><span class="val accent" id="fCond">DS — deadstock</span></div>
+          <div class="mi-row"><span class="lbl">Size</span><span class="val" id="fSize">US 10 / UK 9.5</span></div>
+          <div class="mi-row"><span class="lbl">Year</span><span class="val" id="fYear">2019</span></div>
+          <div class="mi-row"><span class="lbl">Retail</span><span class="val" id="fRetail">£175</span></div>
+          <div class="mi-row"><span class="lbl">Market</span><span class="val accent" id="fMarket">£410 ↑ 34%</span></div>
+          <div class="mi-row"><span class="lbl">Story</span><span class="val" id="fAcq">Release-day raffle win</span></div>
+        </div>
+        <div class="mi-actions">
+          <button class="btn" id="mShare">🔗 Share item</button>
+          <button class="btn" id="mOpen">Open full page ↗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -296,7 +374,73 @@
   let starred=false, stars=986
   starBtn.addEventListener('click',()=>{starred=!starred;stars+=starred?1:-1;starBtn.classList.toggle('on',starred);starBtn.querySelector('.ic').textContent=starred?'★':'☆';starCount.textContent=stars.toLocaleString();toast(starred?'Starred — nice pick':'Unstarred')})
   document.querySelectorAll('.star-mini').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.classList.toggle('on');b.textContent=b.classList.contains('on')?'★':'☆'}))
-  document.getElementById('itemStar1').addEventListener('click',()=>toast('Mockup — would open the item detail page'))
+
+  // ---------- item detail modal ----------
+  const DETAILS={
+    'Nike Air Max 1 "Sunset"':{cond:'DS — deadstock',size:'US 10 / UK 9',year:'2021',retail:'£120',market:'£185 ↑ 12%',acq:'Nike restock · Mar 2021',pos:'38 of 38',kicker:'Sneaker · added Mar 2021',story:'Scored on a surprise restock while queuing for coffee. The sunset fade never gets old in hand.'},
+    'Puma Suede Classic':{cond:'DS — deadstock',size:'US 9.5 / UK 8.5',year:'2020',retail:'£65',market:'£90 ↑ 5%',acq:'Retail pickup · Jun 2020',pos:'37 of 38',kicker:'Sneaker · added Jun 2020',story:'The pair my dad wore in the 80s — same colourway, fresh box. Nostalgia you can lace up.'},
+    'New Balance 990v3 "Olive"':{cond:'VNDS — tried on',size:'US 10.5 / UK 9.5',year:'2022',retail:'£180',market:'£240 ↑ 9%',acq:'Retail · Feb 2022',pos:'36 of 38',kicker:'Sneaker · added Feb 2022',story:'“Dad shoes” until you walk a mile in them. The only pair I’ve doubled up on.'},
+    'Nike Dunk Low "Blue Chill"':{cond:'DS — deadstock',size:'US 10 / UK 9',year:'2021',retail:'£95',market:'£160 ↑ 21%',acq:'SNKRS draw win · Aug 2021',pos:'35 of 38',kicker:'Sneaker · added Aug 2021',story:'Won the draw on my birthday. Still DS because I can’t bring myself to crease them.'},
+    'NB 574 "Grey Day"':{cond:'VNDS — tried on',size:'US 9 / UK 8',year:'2020',retail:'£85',market:'£95 ↑ 3%',acq:'Retail · May 2020',pos:'34 of 38',kicker:'Sneaker · added May 2020',story:'The daily beater that lives by the door. Comfortable enough to forget you’re wearing them.'},
+    'Vans Old Skool "Maroon"':{cond:'DS — deadstock',size:'US 10.5 / UK 9.5',year:'2019',retail:'£60',market:'£70 ↑ 2%',acq:'Charity-shop find · Oct 2019',pos:'33 of 38',kicker:'Sneaker · added Oct 2019',story:'Deadstock in a charity shop for a tenner. Still the best find on the wall.'},
+    'Air Max 95 "Neon" 2020':{cond:'DS — deadstock',size:'US 10 / UK 9',year:'2020',retail:'£140',market:'£210 ↑ 14%',acq:'Retail · Feb 2020',pos:'32 of 38',kicker:'Sneaker · added Feb 2020',story:'The retro of the shoe that started it all for me in the 90s. Instant nostalgia.'},
+    'Jordan 1 High "Court"':{cond:'DS — deadstock',size:'US 9.5 / UK 8.5',year:'2021',retail:'£165',market:'£280 ↑ 18%',acq:'SNKRS draw · Apr 2021',pos:'31 of 38',kicker:'Sneaker · added Apr 2021',story:'The gateway pair — bought this, then the wall happened. Zero regrets.'}
+  }
+  const featuredEntry={
+    img:document.querySelector('.featured .art img').src,
+    title:'Air Jordan 4 Retro — "Bred" 2019',
+    sub:'US 9.5 · grail #1',
+    cond:'DS — deadstock',size:'US 9.5 / UK 8.5',year:'2019',retail:'£175',market:'£410 ↑ 34%',acq:'Release-day raffle win · May 2019',pos:'Featured grail',kicker:'Sneaker · grail #1',story:'The pair that started the wall. DS, original box and laces, bought on release day for retail — and still the crown jewel.'
+  }
+  function entryFromCard(card){
+    const img=card.querySelector('img').src
+    const title=card.querySelector('.t-title').textContent
+    const sub=card.querySelector('.t-sub').textContent
+    const d=DETAILS[title]||{cond:card.querySelector('.cond')?.textContent||'DS',size:sub,year:'—',retail:'—',market:'—',acq:'—',pos:'—',kicker:'Sneaker',story:'No notes yet on this one.'}
+    return {img,title,sub,...d}
+  }
+  const modalCards=[...document.querySelectorAll('#items .item')]
+  const entries=[featuredEntry,...modalCards.map(entryFromCard)]
+  let entryIdx=0, mStarred=false
+
+  const overlay=document.getElementById('modalOverlay')
+  const el={img:document.getElementById('mImg'),cond:document.getElementById('mCond'),count:document.getElementById('mCount'),kicker:document.getElementById('mKicker'),title:document.getElementById('modalTitle'),sub:document.getElementById('mSub'),story:document.getElementById('mStory'),fCond:document.getElementById('fCond'),fSize:document.getElementById('fSize'),fYear:document.getElementById('fYear'),fRetail:document.getElementById('fRetail'),fMarket:document.getElementById('fMarket'),fAcq:document.getElementById('fAcq'),pos:document.getElementById('posLabel'),mPos:document.getElementById('modalPos'),star:document.getElementById('mStar')}
+
+  function fillEntry(i){
+    entryIdx=((i%entries.length)+entries.length)%entries.length
+    const e=entries[entryIdx]
+    el.img.src=e.img; el.img.alt=e.title
+    el.cond.textContent=e.cond
+    el.kicker.textContent=e.kicker
+    el.title.textContent=e.title
+    el.sub.textContent=e.sub
+    el.story.textContent=e.story
+    el.fCond.textContent=e.cond; el.fSize.textContent=e.size; el.fYear.textContent=e.year
+    el.fRetail.textContent=e.retail; el.fMarket.textContent=e.market; el.fAcq.textContent=e.acq
+    el.pos.textContent=entryIdx===0?'Featured grail':e.pos
+    el.mPos.textContent=entryIdx===0?'Featured grail':'Recent additions'
+    el.star.textContent=mStarred?'★':'☆'; el.star.classList.toggle('on',mStarred)
+    overlay.querySelector('.modal-body').scrollTop=0
+  }
+  function openModal(i){fillEntry(i);overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+  function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+
+  modalCards.forEach((card,idx)=>card.addEventListener('click',()=>openModal(idx+1)))
+  document.querySelector('.featured').addEventListener('click',e=>{if(!e.target.closest('.btn'))openModal(0)})
+  document.getElementById('itemStar1').addEventListener('click',()=>openModal(0))
+  document.getElementById('modalClose').addEventListener('click',closeModal)
+  document.getElementById('prevBtn').addEventListener('click',()=>fillEntry(entryIdx-1))
+  document.getElementById('nextBtn').addEventListener('click',()=>fillEntry(entryIdx+1))
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()})
+  document.addEventListener('keydown',e=>{
+    if(!overlay.classList.contains('open'))return
+    if(e.key==='Escape')closeModal()
+    if(e.key==='ArrowLeft')fillEntry(entryIdx-1)
+    if(e.key==='ArrowRight')fillEntry(entryIdx+1)
+  })
+  el.star.addEventListener('click',()=>{mStarred=!mStarred;el.star.textContent=mStarred?'★':'☆';el.star.classList.toggle('on',mStarred);toast(mStarred?'Item starred':'Item unstarred')})
+  document.getElementById('mShare').addEventListener('click',()=>toast('Mockup — would share this item'))
+  document.getElementById('mOpen').addEventListener('click',()=>toast('Mockup — would open the full item page'))
 
   // copy / share
   let copied=false, copies=241
