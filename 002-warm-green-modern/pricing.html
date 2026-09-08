@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | Collectd — Warm Green Modern (page mockup 003)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f5f2ea; --ink:#1c2b20; --surface:#fdfbf4; --surface-2:#ece7d9;
+    --border:#ddd6c4; --primary:#2e6b3f; --primary-2:#429a53; --primary-ink:#1d4a2c;
+    --muted:#5d6a5e; --faint:#8a948b; --warm:#c98a55; --gold:#b0893f;
+    --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-serif:'Newsreader',Georgia,serif;
+    --radius:16px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:26px;height:70px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-serif);font-weight:700;font-size:23px;letter-spacing:-.02em}
+  .logo .ll{color:var(--primary-2)}
+  .mark{width:32px;height:32px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;gap:3px;flex:none;box-shadow:0 4px 12px -3px rgba(46,107,63,.5)}
+  .mark i{display:block;width:3.5px;height:15px;background:#f4f9f0;border-radius:2px}
+  .nav-links{display:flex;gap:24px;font-size:14.5px;color:var(--muted);margin-left:6px}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links a.active{color:var(--primary);font-weight:700;position:relative}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2.5px;border-radius:2px;background:var(--primary-2)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:14.5px}
+  .btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;font-weight:600;font-size:14.5px;padding:11px 20px;border:1px solid transparent;cursor:pointer;transition:transform .12s,box-shadow .2s,background .2s;white-space:nowrap;background:none;font-family:inherit;text-align:center;justify-content:center}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--primary);color:#f2f8ef;box-shadow:0 10px 24px -10px rgba(46,107,63,.6)}
+  .btn-primary:hover{background:var(--primary-ink)}
+  .btn-ghost{border-color:var(--border);background:var(--surface);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+  .btn-warm{background:var(--warm);color:#2b1c0e;box-shadow:0 10px 24px -12px rgba(201,138,85,.6)}
+  .btn-warm:hover{background:#db9a64}
+  .btn-sm{padding:8px 15px;font-size:13px;border-radius:10px}
+  .btn-lg{width:100%;padding:14px 20px;font-size:15.5px;border-radius:14px}
+
+  /* hero */
+  header.hero{position:relative;padding:64px 0 20px;overflow:hidden;text-align:center}
+  .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 480px at 50% -30%,rgba(66,154,83,.12),transparent 62%),radial-gradient(500px 320px at 8% 30%,rgba(201,138,85,.08),transparent 60%)}
+  .crumb{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--faint);font-weight:600;margin-bottom:18px}
+  .crumb a:hover{color:var(--primary)}
+  .crumb .sep{opacity:.5}
+  h1.hero-title{font-family:var(--font-serif);font-weight:600;font-size:clamp(40px,4.8vw,62px);line-height:1.02;letter-spacing:-.03em;position:relative}
+  h1 .accent{color:var(--primary);font-style:italic;font-weight:500}
+  .hero-sub{margin:16px auto 0;max-width:520px;color:var(--muted);font-size:17px;position:relative}
+
+  /* toggle */
+  .billing{display:inline-flex;align-items:center;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:5px;margin:34px auto 0;position:relative}
+  .billing button{border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;padding:9px 20px;border-radius:10px;cursor:pointer;color:var(--muted);transition:.2s;display:flex;align-items:center;gap:8px}
+  .billing button.active{background:var(--surface);color:var(--primary);box-shadow:0 4px 12px -6px rgba(28,43,32,.3)}
+  .billing .save{font-size:10.5px;font-weight:800;background:#f7ecd2;color:var(--gold);border-radius:999px;padding:3px 8px}
+
+  /* plan cards */
+  .plans{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;margin-top:44px;align-items:stretch}
+  .plan{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:36px 32px;display:flex;flex-direction:column;position:relative;transition:.25s}
+  .plan:hover{transform:translateY(-4px);box-shadow:0 30px 60px -30px rgba(28,43,32,.35)}
+  .plan .p-name{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .plan .p-price{font-family:var(--font-serif);font-weight:600;font-size:56px;letter-spacing:-.03em;margin-top:14px;display:flex;align-items:baseline;gap:8px}
+  .plan .p-price small{font-family:var(--font-ui);font-size:15px;font-weight:600;color:var(--faint);letter-spacing:0}
+  .plan .p-note{font-size:13.5px;color:var(--muted);margin-top:6px;min-height:22px}
+  .plan .p-desc{margin-top:16px;color:var(--muted);font-size:14.5px}
+  .plan .btn-lg{margin-top:28px}
+  .plan .p-fine{margin-top:12px;text-align:center;font-size:12px;color:var(--faint)}
+  .plan.pro{background:linear-gradient(165deg,#1d4a2c,#163621);border-color:rgba(66,154,83,.4);color:#eaf2e6;box-shadow:0 40px 70px -35px rgba(22,54,33,.6)}
+  .plan.pro .p-name{color:#8fd39b}
+  .plan.pro .p-note{color:#b9d4bb}
+  .plan.pro .p-desc{color:#a9c8ab}
+  .plan.pro::before{content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;background:radial-gradient(360px 220px at 85% -5%,rgba(66,154,83,.35),transparent 60%)}
+  .plan.pro > *{position:relative}
+  .pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--warm);color:#2b1c0e;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 14px;box-shadow:0 8px 18px -8px rgba(201,138,85,.8);white-space:nowrap}
+  .plan .check-mini{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);font-weight:600;margin:10px 0 0}
+  .plan .check-mini::before{content:"";width:18px;height:18px;border-radius:50%;background:color-mix(in srgb,var(--primary-2) 16%,white);flex:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%232e6b3f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E")}
+  .plan.pro .check-mini{color:#dbead8}
+  .plan.pro .check-mini::before{background:rgba(143,211,155,.2);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238fd39b' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E")}
+
+  /* comparison table */
+  .compare{margin-top:64px}
+  .compare .c-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:26px}
+  .compare .c-head h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(26px,2.8vw,34px);letter-spacing:-.015em}
+  .compare .c-head p{color:var(--muted);font-size:14.5px}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+  thead th{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:16px 20px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface-2);color:var(--muted)}
+  thead th.c-name{color:var(--ink);font-family:var(--font-serif);font-size:16px;font-weight:700;letter-spacing:0;text-transform:none}
+  thead th.col-pro{color:var(--primary)}
+  tbody td{padding:15px 20px;font-size:14.5px;border-bottom:1px solid color-mix(in srgb,var(--border) 60%,transparent)}
+  tbody tr:last-child td{border-bottom:none}
+  td.f-name{color:var(--ink);font-weight:600}
+  td.f-free{color:var(--muted)}
+  td.f-pro{color:var(--primary-ink);font-weight:600}
+  td.cell{text-align:center;width:24%}
+  tbody tr:hover{background:color-mix(in srgb,var(--primary-2) 4%,white)}
+  .val-ic{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;flex:none}
+  .val-ic.yes{background:color-mix(in srgb,var(--primary-2) 15%,white)}
+  .val-ic.no{background:var(--surface-2);color:var(--faint)}
+  .val-copy{font-weight:600}
+
+  /* lifetime */
+  .lifetime{margin-top:26px;background:linear-gradient(120deg,#2b2414,#1f1a0e);color:#efe4c8;border-radius:22px;padding:30px 36px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden}
+  .lifetime::before{content:"";position:absolute;inset:0;background:radial-gradient(380px 200px at 92% -10%,rgba(201,138,85,.3),transparent 60%)}
+  .lifetime .lt-ic{width:52px;height:52px;border-radius:16px;background:rgba(201,138,85,.16);display:flex;align-items:center;justify-content:center;font-size:24px;flex:none;position:relative}
+  .lifetime .lt-body{flex:1;min-width:220px;position:relative}
+  .lifetime .lt-body b{font-family:var(--font-serif);font-size:21px;font-weight:600;display:block}
+  .lifetime .lt-body p{color:#b8a585;font-size:13.5px;margin-top:4px}
+  .lifetime .lt-price{font-family:var(--font-serif);font-weight:600;font-size:40px;letter-spacing:-.02em;position:relative}
+  .lifetime .btn{margin-left:auto;position:relative}
+
+  /* faq */
+  .faq-sec{padding-top:70px}
+  .faq-grid{max-width:780px;margin:0 auto}
+  .faq-head{text-align:center;margin-bottom:38px}
+  .faq-head h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(28px,3vw,38px)}
+  .faq{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:12px;overflow:hidden;transition:.2s}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-weight:700;font-size:15.5px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;color:var(--primary);font-size:16px;transition:.3s}
+  .faq[open] .plus{transform:rotate(135deg);border-color:var(--primary);background:color-mix(in srgb,var(--primary) 10%,white)}
+  .faq .a{padding:0 24px 22px;color:var(--muted);font-size:15px;max-width:64ch}
+
+  /* guarantee */
+  .guarantee{margin-top:26px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:13.5px;font-weight:600}
+  .guarantee span{display:inline-flex;gap:8px;align-items:center}
+
+  section.cta{padding:80px 0 30px;text-align:center}
+  .cta-box{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:66px 34px;position:relative;overflow:hidden}
+  .cta-box::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(66,154,83,.12),transparent 65%);top:-300px;left:50%;transform:translateX(-50%)}
+  .cta-box h2{font-family:var(--font-serif);font-size:clamp(30px,3.6vw,46px);font-weight:600;letter-spacing:-.02em;position:relative}
+  .cta-box p{color:var(--muted);max-width:48ch;margin:16px auto 0;position:relative}
+  .cta-box .hero-cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+
+  footer{border-top:1px solid var(--border);margin-top:60px;padding:36px 0 56px}
+  .foot-in{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+  .foot-links{display:flex;gap:22px;font-size:13.5px;color:var(--muted)}
+  .foot-links a:hover{color:var(--primary)}
+  .foot-legal{font-size:12.5px;color:var(--faint);text-align:center;margin-top:18px;width:100%}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){.plans{grid-template-columns:1fr}.nav-links{display:none}.plan.pro{order:-1}.lifetime .btn{margin-left:0;width:100%}}
+  @media(max-width:640px){td.cell{width:30%}.compare table{font-size:13px}td,th{padding:11px 12px!important}.lifetime{padding:24px}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Discover</a>
+      <a class="active" href="#">Pricing</a>
+      <a href="#">Collections</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-ghost btn-sm" href="#">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#">Start your collection</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="crumb"><a href="#">Home</a><span class="sep">/</span><span>Pricing</span></div>
+    <h1 class="hero-title">Simple, transparent <span class="accent">pricing</span></h1>
+    <p class="hero-sub">Start free. Upgrade when your collection outgrows the shoebox. No surprises, cancel anytime.</p>
+
+    <div class="billing" id="billing">
+      <button data-period="monthly" id="btnMonthly">Monthly</button>
+      <button data-period="annual" class="active" id="btnAnnual">Annual <span class="save">Save ~33%</span></button>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:10px">
+  <div class="wrap">
+    <div class="plans reveal">
+      <!-- Free -->
+      <div class="plan">
+        <div class="p-name">Free</div>
+        <div class="p-price">$0<small>/forever</small></div>
+        <div class="p-note">For trying collectd out</div>
+        <p class="p-desc">Everything you need to catalogue your first shelf and share it with the world.</p>
+        <div style="margin-top:22px">
+          <div class="check-mini">3 collections</div>
+          <div class="check-mini">100 items per collection</div>
+          <div class="check-mini">1 image per item</div>
+          <div class="check-mini">Grid &amp; table galleries</div>
+          <div class="check-mini">Public sharing</div>
+        </div>
+        <button class="btn btn-ghost btn-lg" id="freeCta" style="margin-top:auto">Sign up free</button>
+        <div class="p-fine">No credit card required</div>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan pro">
+        <span class="pop-badge">Most popular</span>
+        <div class="p-name">Pro</div>
+        <div class="p-price"><span id="proPrice">$40</span><small id="proPer">/year</small></div>
+        <div class="p-note" id="proNote">$3.33/mo — billed annually</div>
+        <p class="p-desc">For collectors who mean it. Bigger limits, richer galleries, and your data in your hands.</p>
+        <div style="margin-top:22px">
+          <div class="check-mini">50 collections</div>
+          <div class="check-mini">Unlimited items</div>
+          <div class="check-mini">10 images per item</div>
+          <div class="check-mini">Custom themes &amp; showcase</div>
+          <div class="check-mini">Export, import &amp; analytics</div>
+        </div>
+        <button class="btn btn-primary btn-lg" id="proCta" style="margin-top:auto">Upgrade to Pro</button>
+        <div class="p-fine" style="color:#a9c8ab">Secure checkout via Paddle · cancel anytime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:40px">
+  <div class="wrap">
+    <div class="compare reveal">
+      <div class="c-head">
+        <div>
+          <span class="kicker">Compare plans</span>
+          <h2>Every feature, side by side</h2>
+        </div>
+        <p>The full breakdown — free vs pro.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="c-name">Feature</th>
+            <th class="cell">Free</th>
+            <th class="cell col-pro">Pro</th>
+          </tr>
+        </thead>
+        <tbody id="featBody">
+          <tr><td class="f-name">Collections</td><td class="cell f-free val-copy">3</td><td class="cell f-pro val-copy">50</td></tr>
+          <tr><td class="f-name">Items per collection</td><td class="cell f-free val-copy">100</td><td class="cell f-pro val-copy">Unlimited</td></tr>
+          <tr><td class="f-name">Fields per template</td><td class="cell f-free val-copy">10</td><td class="cell f-pro val-copy">20</td></tr>
+          <tr><td class="f-name">Upload size (per file)</td><td class="cell f-free val-copy">5 MB</td><td class="cell f-pro val-copy">10 MB</td></tr>
+          <tr><td class="f-name">Total image storage</td><td class="cell f-free val-copy">250 MB</td><td class="cell f-pro val-copy">5 GB</td></tr>
+          <tr><td class="f-name">Images per item</td><td class="cell f-free val-copy">1</td><td class="cell f-pro val-copy">10</td></tr>
+          <tr><td class="f-name">Tags per collection</td><td class="cell f-free val-copy">5</td><td class="cell f-pro val-copy">10</td></tr>
+          <tr><td class="f-name">Data export</td><td class="cell"><span class="val-ic no">✕</span></td><td class="cell"><span class="val-ic yes">✓</span></td></tr>
+          <tr><td class="f-name">Data import</td><td class="cell"><span class="val-ic no">✕</span></td><td class="cell"><span class="val-ic yes">✓</span></td></tr>
+          <tr><td class="f-name">Analytics dashboard</td><td class="cell f-free val-copy">Totals only</td><td class="cell f-pro val-copy">Full trend charts</td></tr>
+          <tr><td class="f-name">Custom gallery themes</td><td class="cell"><span class="val-ic no">✕</span></td><td class="cell"><span class="val-ic yes">✓</span></td></tr>
+          <tr><td class="f-name">Private collections</td><td class="cell"><span class="val-ic no">✕</span></td><td class="cell"><span class="val-ic yes">✓</span></td></tr>
+          <tr><td class="f-name">Premium badge</td><td class="cell"><span class="val-ic no">✕</span></td><td class="cell"><span class="val-ic yes">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Lifetime -->
+    <div class="lifetime reveal">
+      <div class="lt-ic">💎</div>
+      <div class="lt-body">
+        <b>Lifetime Access</b>
+        <p>One-time payment — all Pro features, forever. For the collector who's in it for the long haul.</p>
+      </div>
+      <div class="lt-price" id="lifetimePrice">$99</div>
+      <button class="btn btn-warm" id="lifeCta">Get Lifetime</button>
+    </div>
+
+    <div class="guarantee reveal">
+      <span>🔒 Secure checkout via Paddle</span>
+      <span>🔄 Cancel anytime</span>
+      <span>🛡️ 14-day money-back guarantee</span>
+    </div>
+  </div>
+</section>
+
+<section class="faq-sec">
+  <div class="wrap">
+    <div class="faq-grid reveal">
+      <div class="faq-head">
+        <span class="kicker">FAQ</span>
+        <h2>Pricing questions</h2>
+      </div>
+      <details class="faq"><summary>Is there really a free plan?<span class="plus">+</span></summary><div class="a">Yes — genuinely free, forever. 3 collections, 100 items each, public galleries and grid/table views. No trial countdown, no card required. Upgrade only when you need the room.</div></details>
+      <details class="faq"><summary>What happens if I cancel Pro?<span class="plus">+</span></summary><div class="a">Nothing is deleted. You keep every collection, item, image and field — you simply drop back to free limits and lose Pro-only features like custom themes, analytics and private collections. Export is always available.</div></details>
+      <details class="faq"><summary>Can I pay annually for a discount?<span class="plus">+</span></summary><div class="a">Yes. Annual billing is $40/year — about $3.33 a month — which works out ~33% cheaper than monthly. Toggle the billing period above to compare.</div></details>
+      <details class="faq"><summary>What is Lifetime Access?<span class="plus">+</span></summary><div class="a">A one-time $99 payment for all Pro features with no subscription. Perfect if you've found your forever home and never want to think about the bill again.</div></details>
+      <details class="faq"><summary>How do refunds work?<span class="plus">+</span></summary><div class="a">New Pro subscriptions are covered by our 14-day money-back guarantee — no questions asked. Lifetime Access is refundable within the same window. See the full Refund Policy for details.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Ready to organise your collection?</h2>
+      <p>Join a growing community of collectors who trust collectd to track, showcase and share their passions.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" id="startCta">Create your free account →</button>
+        <a class="btn btn-ghost" href="#">Browse collections</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" style="font-size:20px" href="#"><span class="mark" style="width:28px;height:28px"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="foot-links"><a href="#">Discover</a><a href="#">Pricing</a><a href="#">Refund Policy</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="foot-legal">© 2026 collectd · Satiate Studio Ltd</div>
+  </div>
+</footer>
+
+<script>
+  // reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4% 0px'})
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
+
+  // billing toggle
+  const monthly=document.getElementById('btnMonthly'), annual=document.getElementById('btnAnnual')
+  const price=document.getElementById('proPrice'), per=document.getElementById('proPer'), note=document.getElementById('proNote')
+  let period='annual'
+  function setPeriod(p){
+    period=p
+    monthly.classList.toggle('active',p==='monthly')
+    annual.classList.toggle('active',p==='annual')
+    if(p==='monthly'){price.textContent='$5';per.textContent='/month';note.textContent='Billed monthly · cancel anytime'}
+    else{price.textContent='$40';per.textContent='/year';note.textContent='$3.33/mo — billed annually'}
+  }
+  monthly.addEventListener('click',()=>setPeriod('monthly'))
+  annual.addEventListener('click',()=>setPeriod('annual'))
+
+  // CTA feints
+  function feint(btn,msg){return function(e){e.preventDefault();const orig=btn.textContent;btn.textContent='✓ '+msg;btn.style.opacity=.9;setTimeout(()=>{btn.textContent=orig;btn.style.opacity=1},1500)}}
+  document.getElementById('freeCta').addEventListener('click',feint(document.getElementById('freeCta'),'Mockup — would start signup'))
+  document.getElementById('proCta').addEventListener('click',feint(document.getElementById('proCta'),'Mockup — would open Paddle checkout'))
+  document.getElementById('lifeCta').addEventListener('click',feint(document.getElementById('lifeCta'),'Mockup — would open Paddle checkout'))
+  document.getElementById('startCta').addEventListener('click',feint(document.getElementById('startCta'),'Mockup — would create account'))
+</script>
+</body>
+</html>
