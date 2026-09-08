@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collectd — Warm Green Modern (redesign sketch 002)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f5f2ea; --ink:#1c2b20; --surface:#fdfbf4; --surface-2:#ece7d9;
+    --border:#ddd6c4; --primary:#2e6b3f; --primary-2:#429a53; --primary-ink:#1d4a2c;
+    --muted:#5d6a5e; --faint:#8a948b; --warm:#c98a55;
+    --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-serif:'Newsreader',Georgia,serif;
+    --radius:16px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+  .serif{font-family:var(--font-serif)}
+
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:26px;height:70px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-serif);font-weight:700;font-size:23px;letter-spacing:-.02em}
+  .logo .ll{color:var(--primary-2)}
+  .mark{width:32px;height:32px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;gap:3px;flex:none;box-shadow:0 4px 12px -3px rgba(46,107,63,.5)}
+  .mark i{display:block;width:3.5px;height:15px;background:#f4f9f0;border-radius:2px}
+  .nav-links{display:flex;gap:24px;font-size:14.5px;color:var(--muted);margin-left:6px}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:14.5px}
+  .btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;font-weight:600;font-size:14.5px;padding:11px 20px;border:1px solid transparent;cursor:pointer;transition:transform .12s,box-shadow .2s,background .2s;white-space:nowrap}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--primary);color:#f2f8ef;box-shadow:0 10px 24px -10px rgba(46,107,63,.6)}
+  .btn-primary:hover{background:var(--primary-ink)}
+  .btn-ghost{border-color:var(--border);background:var(--surface);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+  .btn-sm{padding:8px 15px;font-size:13px;border-radius:10px}
+
+  /* hero */
+  header.hero{position:relative;padding:80px 0 30px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;pointer-events:none;background:
+    radial-gradient(900px 500px at 12% -10%,rgba(66,154,83,.13),transparent 60%),
+    radial-gradient(700px 460px at 95% 0%,rgba(201,138,85,.16),transparent 60%)}
+  .hero-in{position:relative;text-align:center;max-width:860px;margin:0 auto}
+  .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:26px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--primary-2);box-shadow:0 0 0 3px rgba(66,154,83,.18)}
+  h1.hero-title{font-family:var(--font-serif);font-weight:600;font-size:clamp(46px,5.8vw,78px);line-height:1.02;letter-spacing:-.03em;color:var(--ink);text-wrap:balance}
+  h1 .accent{color:var(--primary);font-style:italic;font-weight:500}
+  .hero-sub{margin:26px auto 0;max-width:600px;color:var(--muted);font-size:18px;text-wrap:pretty}
+  .hero-cta{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* hero visual — browser mock */
+  .browser-shot{position:relative;max-width:1060px;margin:64px auto 0;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:0 60px 90px -45px rgba(28,43,32,.4);overflow:visible}
+  .browser-top{display:flex;align-items:center;gap:12px;padding:15px 20px;border-bottom:1px solid var(--border)}
+  .dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:#d9d2c0}.dots i:nth-child(1){background:#d98a6a}.dots i:nth-child(2){background:#dfb66c}.dots i:nth-child(3){background:#7fae7d}
+  .url-bar{flex:1;margin:0 auto;max-width:420px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;font-size:12.5px;color:var(--faint);padding:6px 14px;text-align:center}
+  .bs-body{position:relative;padding:0;overflow:hidden}
+  .bs-gallery-top{display:flex;align-items:center;justify-content:space-between;padding:24px 26px 12px}
+  .bs-gallery-top .g-title{font-family:var(--font-serif);font-weight:700;font-size:22px}
+  .bs-gallery-top .g-owner{font-size:12.5px;color:var(--faint)}
+  .bs-gallery-top .right{display:flex;gap:10px}
+  .mini-chip{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--muted);font-weight:600}
+  .bs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:12px 26px 26px}
+  .bs-card{border:1px solid var(--border);border-radius:13px;overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s}
+  .bs-card:hover{transform:translateY(-5px);box-shadow:0 18px 30px -16px rgba(28,43,32,.35)}
+  .bs-img{aspect-ratio:1/1;background-size:cover;background-position:center}
+  .bs-cap{padding:9px 11px}
+  .bs-cap b{display:block;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bs-cap span{font-size:11px;color:var(--faint)}
+  /* floating stat cards */
+  .float{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:15px;box-shadow:0 22px 44px -20px rgba(28,43,32,.45);padding:13px 18px;display:flex;gap:12px;align-items:center;font-size:13px;z-index:3}
+  .float .ic{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+  .float b{display:block;font-size:15.5px}
+  .float span{color:var(--faint);font-size:11.5px}
+  .f-1{top:-26px;left:-30px;animation:floaty 7s ease-in-out infinite}
+  .f-2{top:90px;right:-34px;animation:floaty 8s ease-in-out infinite .8s}
+  .f-3{bottom:-24px;left:44%;transform:translateX(-50%);animation:floaty 7.5s ease-in-out infinite 1.5s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  .f-3{animation-name:floaty3}@keyframes floaty3{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-11px)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* tag strip */
+  .tagbar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:44px}
+  .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:10px 18px;font-size:14px;font-weight:600;transition:.2s}
+  .tag:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px);box-shadow:0 10px 20px -12px rgba(46,107,63,.4)}
+  .tag .ic{font-size:16px}
+  .tag .n{color:var(--faint);font-weight:500}
+
+  section{padding:92px 0}
+  .sec-head{max-width:640px;margin-bottom:52px}
+  .sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+  .sec-head h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(32px,3.8vw,48px);line-height:1.08;letter-spacing:-.02em;margin-top:14px;text-wrap:balance}
+  .sec-head p{margin-top:16px;color:var(--muted);font-size:17px}
+
+  /* features */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;transition:.25s;position:relative;overflow:hidden}
+  .feat::after{content:"";position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(66,154,83,.10),transparent 70%);top:-80px;right:-80px;opacity:0;transition:opacity .3s}
+  .feat:hover{transform:translateY(-5px);border-color:rgba(46,107,63,.4);box-shadow:0 24px 40px -24px rgba(28,43,32,.3)}
+  .feat:hover::after{opacity:1}
+  .feat .ic{width:46px;height:46px;border-radius:14px;background:color-mix(in srgb,var(--primary) 12%,white);display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:20px}
+  .feat h3{font-size:17.5px;font-weight:700;letter-spacing:-.01em}
+  .feat p{margin-top:10px;color:var(--muted);font-size:14.5px;line-height:1.6}
+  .feat .more{margin-top:16px;font-size:13px;font-weight:700;color:var(--primary);display:inline-flex;gap:6px;align-items:center}
+
+  /* editorial split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:26px 0}
+  .split h3{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,2.5vw,33px);line-height:1.15;letter-spacing:-.015em}
+  .split p{margin-top:16px;color:var(--muted);font-size:16.5px}
+  .split .lead-note{font-family:var(--font-serif);font-style:italic;font-size:19px;color:var(--primary);display:block;margin-bottom:6px}
+  .checklist{margin-top:22px;list-style:none}
+  .checklist li{display:flex;gap:12px;align-items:center;padding:8px 0;font-size:15px;font-weight:500}
+  .checklist .ck{width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--primary-2) 16%,white);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;font-weight:800}
+  .vis{position:relative}
+  .vis .ph{width:100%;border-radius:22px;border:1px solid var(--border);box-shadow:0 34px 60px -30px rgba(28,43,32,.4)}
+  .vis.round .ph{border-radius:50%}
+  .vis-ratio-tall .ph{aspect-ratio:4/5;object-fit:cover}
+  .vis-ratio-wide .ph{aspect-ratio:4/3.4;object-fit:cover}
+  .ring{border:2px dashed color-mix(in srgb,var(--primary) 45%,transparent);border-radius:999px;position:absolute}
+  .chip{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:13px;box-shadow:0 16px 34px -18px rgba(28,43,32,.4);padding:11px 15px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:center;backdrop-filter:blur(4px)}
+  .chip small{display:block;font-weight:500;color:var(--faint)}
+  .chip .sw{width:22px;height:22px;border-radius:7px;flex:none}
+
+  /* social proof / stat band */
+  .statband{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--surface);border:1px solid var(--border);border-radius:22px;margin-top:56px;overflow:hidden}
+  .stat{padding:34px 26px;text-align:center;border-left:1px solid var(--border)}
+  .stat:first-child{border-left:none}
+  .stat .num{font-family:var(--font-serif);font-weight:700;font-size:clamp(30px,3.2vw,44px);letter-spacing:-.02em;color:var(--primary)}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* themes strip */
+  .theme-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .tc{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:.25s}
+  .tc:hover{transform:translateY(-5px);box-shadow:0 24px 40px -22px rgba(28,43,32,.35)}
+  .tc-prev{height:150px;padding:20px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--border)}
+  .tc-meta{padding:15px 18px}
+  .tc-meta b{font-size:14.5px}
+  .tc-meta span{display:block;font-size:12px;color:var(--faint);margin-top:2px}
+  .prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.prev-grid i{border-radius:8px;height:46px}
+  .prev-table i{display:block;height:7px;border-radius:4px;margin-bottom:7px}
+  .prev-show .big{border-radius:10px;height:64px;margin-bottom:7px}
+  .prev-show .row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.prev-show .row i{height:26px;border-radius:7px}
+  .prev-card{display:flex;gap:10px;align-items:center}.prev-card .front{width:52px;aspect-ratio:3/4;border-radius:8px;flex:none}.prev-card .meta{flex:1}.prev-card .meta i{display:block;height:6px;border-radius:3px;margin-bottom:6px}
+  .t1{background:linear-gradient(150deg,#eaf2e6,#cfe3d0)}.t2{background:linear-gradient(150deg,#f3e9db,#e5cfa8)}.t3{background:linear-gradient(150deg,#e2e7ef,#c2cedf)}.t4{background:linear-gradient(150deg,#efe3df,#dfc0b4)}
+  .d1{background:#2e6b3f}.d2{background:#c98a55}.d3{background:#5a7ea0}.d4{background:#a05c43}
+
+  /* premium */
+  .prem-section{position:relative}
+  .prem-box{background:linear-gradient(150deg,#1d4a2c,#163621);color:#e9f2e6;border-radius:28px;padding:70px 64px;position:relative;overflow:hidden}
+  .prem-box::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(560px 340px at 90% -10%,rgba(66,154,83,.4),transparent 60%),
+    radial-gradient(400px 300px at 0% 110%,rgba(201,138,85,.2),transparent 60%)}
+  .prem-box .kicker{color:#8fd39b}
+  .prem-box h2{color:#f2f8ef;font-family:var(--font-serif);font-weight:600;font-size:clamp(30px,3.4vw,44px);margin-top:14px}
+  .prem-box .lead{color:#b9d4bb;margin-top:14px;max-width:54ch}
+  .prem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px;position:relative;z-index:1}
+  .prem{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;transition:.25s}
+  .prem:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
+  .prem .ic{font-size:20px;margin-bottom:14px}
+  .prem b{display:block;font-size:15.5px}
+  .prem p{color:#a9c8ab;font-size:13.5px;margin-top:7px;line-height:1.55}
+  .prem-box .btn-primary{margin-top:42px;background:#f2f8ef;color:#1d4a2c;box-shadow:none}
+  .prem-box .btn-primary:hover{background:#fff}
+
+  /* faq */
+  .faq-grid{max-width:780px;margin:0 auto}
+  .faq{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:12px;overflow:hidden;transition:.2s}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-weight:700;font-size:15.5px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;color:var(--primary);font-size:16px;transition:.3s}
+  .faq[open] .plus{transform:rotate(135deg);border-color:var(--primary);background:color-mix(in srgb,var(--primary) 10%,white)}
+  .faq .a{padding:0 24px 22px;color:var(--muted);font-size:15px;max-width:64ch}
+
+  /* final cta */
+  .cta-box{background:var(--surface);border:1px solid var(--border);border-radius:28px;text-align:center;padding:78px 34px;position:relative;overflow:hidden}
+  .cta-box::before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(66,154,83,.12),transparent 65%);top:-320px;left:50%;transform:translateX(-50%)}
+  .cta-box h2{font-family:var(--font-serif);font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.02em;position:relative}
+  .cta-box p{color:var(--muted);max-width:50ch;margin:18px auto 0;position:relative}
+  .cta-box .hero-cta{position:relative}
+
+  footer{border-top:1px solid var(--border);padding:36px 0 56px}
+  .foot-in{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+  .foot-links{display:flex;gap:22px;font-size:13.5px;color:var(--muted)}
+  .foot-links a:hover{color:var(--primary)}
+  .foot-legal{font-size:12.5px;color:var(--faint);text-align:center;margin-top:18px;width:100%}
+
+  @media(max-width:1000px){
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr;gap:46px}
+    .theme-cards{grid-template-columns:1fr 1fr}
+    .prem-grid{grid-template-columns:1fr 1fr}
+    .statband{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:none}.stat{border-top:1px solid var(--border)}
+    .nav-links{display:none}
+  }
+  @media(max-width:600px){.feat-grid,.theme-cards,.prem-grid{grid-template-columns:1fr}.statband{grid-template-columns:1fr}.stat{border-left:none;border-top:1px solid var(--border)}.stat:first-child{border-top:none}.bs-grid{grid-template-columns:repeat(2,1fr)}.f-1,.f-2{display:none}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#community">Community</a>
+      <a href="#themes">Themes</a>
+      <a href="#premium">Premium</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#">Start your collection</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-in">
+      <span class="pill"><span class="dot"></span>The community hub for collectors</span>
+      <h1 class="hero-title reveal in">Every collection<br>deserves a <span class="accent">home</span></h1>
+      <p class="hero-sub">Track trading cards, comics, sneakers, vinyl and anything else you love — with custom fields, beautiful public galleries, and a community that actually gets it.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#">Start your collection →</a>
+        <a class="btn btn-ghost" href="#">Explore galleries</a>
+      </div>
+      <div class="tagbar">
+        <a class="tag"><span class="ic">🎴</span>Trading Cards <span class="n">2,481</span></a>
+        <a class="tag"><span class="ic">📚</span>Comics <span class="n">1,209</span></a>
+        <a class="tag"><span class="ic">👟</span>Sneakers <span class="n">3,872</span></a>
+        <a class="tag"><span class="ic">💿</span>Vinyl <span class="n">1,664</span></a>
+        <a class="tag"><span class="ic">📷</span>Cameras <span class="n">842</span></a>
+        <a class="tag"><span class="ic">⌚</span>Watches <span class="n">907</span></a>
+      </div>
+    </div>
+
+    <div class="browser-shot reveal in" style="transition-delay:.1s">
+      <div class="browser-top">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="url-bar">collectd.io/u/alexandria/vinyl-shelf</div>
+      </div>
+      <div class="bs-body">
+        <div class="bs-gallery-top">
+          <div><div class="g-title">The Sunday Shelf</div><div class="g-owner">by @alexandria · Vinyl · 214 items</div></div>
+          <div class="right"><span class="mini-chip">★ 1.2k stars</span><span class="mini-chip">Showcase</span></div>
+        </div>
+        <div class="bs-grid">
+          <div class="bs-card"><div class="bs-img" style="background-image:url('https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=300&q=60&auto=format&fit=crop')"></div><div class="bs-cap"><b>Kind of Blue</b><span>Miles Davis · NM-</span></div></div>
+          <div class="bs-card"><div class="bs-img" style="background-image:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60&auto=format&fit=crop')"></div><div class="bs-cap"><b>Jordan 4 Retro</b><span>Bred · 2019</span></div></div>
+          <div class="bs-card"><div class="bs-img" style="background-image:url('https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=300&q=60&auto=format&fit=crop')"></div><div class="bs-cap"><b>He-Man 1989</b><span>Mint on card</span></div></div>
+          <div class="bs-card"><div class="bs-img" style="background-image:url('https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=300&q=60&auto=format&fit=crop')"></div><div class="bs-cap"><b>Amazing Spidey #1</b><span>Key issue</span></div></div>
+          <div class="bs-card"><div class="bs-img" style="background-image:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300&q=60&auto=format&fit=crop')"></div><div class="bs-cap"><b>Pentax K1000</b><span>1976 · serviced</span></div></div>
+        </div>
+      </div>
+      <div class="float f-1"><span class="ic" style="background:color-mix(in srgb,var(--primary-2) 16%,white)">⭐</span><div><b>1,204 copies</b><span>of this collection</span></div></div>
+      <div class="float f-2"><span class="ic" style="background:color-mix(in srgb,#c98a55 18%,white)">📸</span><div><b>6 image fields</b><span>per item, captioned</span></div></div>
+      <div class="float f-3"><span class="ic" style="background:color-mix(in srgb,var(--primary) 15%,white)">✓</span><div><b>CSV export ready</b><span>your data, always</span></div></div>
+    </div>
+  </div>
+</header>
+
+<section id="features" style="padding-top:70px">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Everything you need</span>
+      <h2>Serious tools for serious shelves</h2>
+      <p>Powerful, flexible, and refreshingly simple — built by people who collect.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal"><div class="ic">🧩</div><h3>Custom collections</h3><p>Design fields for any hobby — text, numbers, dropdowns, dates, ratings. If you can collect it, you can track it your way.</p><span class="more">Start building →</span></div>
+      <div class="feat reveal"><div class="ic">🔁</div><h3>Copy &amp; collect</h3><p>Copy a community collection and make it yours. Keep the structure you love, drop what you don't, credit flows back.</p><span class="more">Browse templates →</span></div>
+      <div class="feat reveal"><div class="ic">🖼️</div><h3>Public galleries</h3><p>Turn any collection into a shareable gallery. Perfect for Discord, Reddit and the group chat that never stops asking.</p><span class="more">See an example →</span></div>
+      <div class="feat reveal"><div class="ic">👥</div><h3>Community driven</h3><p>Discover collections from fellow collectors, star your favourites, and contribute back to the ecosystem.</p><span class="more">Meet the community →</span></div>
+      <div class="feat reveal"><div class="ic">🔍</div><h3>Smart filtering</h3><p>Search, filter and bookmark specific views. Find the grail in seconds, not scrolls.</p><span class="more">See filtering →</span></div>
+      <div class="feat reveal"><div class="ic">🛡️</div><h3>Yours, always</h3><p>Export CSV or JSON anytime, keep private collections private, and take your data with you wherever you go.</p><span class="more">Export docs →</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="community" style="background:var(--surface-2);padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">From the community</span>
+      <h2>Built for the way collectors actually collect</h2>
+    </div>
+    <div class="split">
+      <div class="vis vis-ratio-tall reveal" style="position:relative">
+        <img class="ph" src="https://images.unsplash.com/photo-1569470451072-68314f596aec?w=900&q=70&auto=format&fit=crop" alt="Record shelf">
+        <span class="ring" style="width:140px;height:140px;top:-34px;left:-34px;animation:spin 22s linear infinite"></span>
+        <div class="chip" style="bottom:22px;left:-18px"><span class="sw" style="background:var(--primary)"></span><div>NM- condition<small>graded by owner</small></div></div>
+      </div>
+      <div class="reveal">
+        <span class="lead-note">“Importing 14 years of collecting took an afternoon.”</span>
+        <h3>Fields that fit your hobby — not a database that fights it</h3>
+        <p>Different collectibles need different details. A sneaker wants a size and a box condition; a comic wants a grade and a pressing; a camera wants a shutter count and a service history. collectd's custom fields bend to the object, not the other way round.</p>
+        <ul class="checklist">
+          <li><span class="ck">✓</span> Mix text, numbers, dropdowns, dates and ratings freely</li>
+          <li><span class="ck">✓</span> Multiple images per item with captions and alt text</li>
+          <li><span class="ck">✓</span> Cover images, accent colours and layout themes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="split" style="border-top:1px solid var(--border)">
+      <div class="reveal">
+        <span class="lead-note">“My wall finally has a living room.”</span>
+        <h3>Galleries worth showing off</h3>
+        <p>Every public collection renders as a clean, fast gallery with its own URL. Four layouts, shareable links, view counts, and stars from the community — your shelf, presented like it deserves.</p>
+        <ul class="checklist">
+          <li><span class="ck">✓</span> Grid, table, showcase and card layouts</li>
+          <li><span class="ck">✓</span> Themes with custom accent colours on Premium</li>
+          <li><span class="ck">✓</span> Private until you say otherwise</li>
+        </ul>
+      </div>
+      <div class="vis vis-ratio-wide reveal">
+        <img class="ph" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1000&q=70&auto=format&fit=crop" alt="Sneaker wall">
+        <div class="chip" style="top:-20px;right:16px">⭐ 3,872 collections starred</div>
+        <div class="chip" style="bottom:-18px;left:30px">👟 38 pairs · 4 grails</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="themes" style="padding-top:80px">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Gallery themes</span>
+      <h2>One shelf, four personalities</h2>
+    </div>
+    <div class="theme-cards">
+      <div class="tc reveal"><div class="tc-prev t1"><div class="prev-grid"><i class="d1"></i><i class="d3"></i><i class="d2"></i><i class="d4"></i></div></div><div class="tc-meta"><b>Grid</b><span>Balanced, browse-friendly</span></div></div>
+      <div class="tc reveal"><div class="tc-prev t2"><div class="prev-table"><i class="d2" style="width:94%"></i><i class="d1" style="width:80%"></i><i class="d3" style="width:88%"></i><i class="d4" style="width:70%"></i></div></div><div class="tc-meta"><b>Table</b><span>Data-first, sortable</span></div></div>
+      <div class="tc reveal"><div class="tc-prev t3"><div class="prev-show"><div class="big" style="background:linear-gradient(120deg,#7ea0c4,#45627f)"></div><div class="row"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div></div></div><div class="tc-meta"><b>Showcase</b><span>Hero items front &amp; centre</span></div></div>
+      <div class="tc reveal"><div class="tc-prev t4"><div class="prev-card"><div class="front" style="background:linear-gradient(160deg,#c98a55,#8a5a33)"></div><div class="meta"><i class="d4" style="width:90%"></i><i class="d1" style="width:62%"></i><i class="d2" style="width:76%"></i></div></div></div><div class="tc-meta"><b>Cards</b><span>Collector-card feel</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="prem-section" id="premium">
+  <div class="wrap">
+    <div class="prem-box reveal">
+      <span class="kicker">Premium</span>
+      <h2>Do more with your collection</h2>
+      <p class="lead">Unlock advanced tools for the collector who's outgrown the shoebox — and keep everything you love about free.</p>
+      <div class="prem-grid">
+        <div class="prem"><div class="ic">📦</div><b>Expanded limits</b><p>3 → 50 collections, unlimited items, double the fields, up to 10 images per item.</p></div>
+        <div class="prem"><div class="ic">🎨</div><b>Gallery themes</b><p>Custom accent colours, cover images, showcase and card layouts.</p></div>
+        <div class="prem"><div class="ic">📤</div><b>Export &amp; import</b><p>CSV and JSON anytime, plus bulk import to get up and running fast.</p></div>
+        <div class="prem"><div class="ic">📊</div><b>Analytics</b><p>Views, stars and trends over time — see what resonates.</p></div>
+      </div>
+      <a class="btn btn-primary" href="#">View plans &amp; pricing</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">FAQ</span>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq-grid reveal">
+      <details class="faq"><summary>What can I collect on collectd?<span class="plus">+</span></summary><div class="a">Anything with a catalogue logic. Trading cards, comics, sneakers, vinyl, cameras, LEGO, coins, action figures, minerals — if you can list it, you can build a collection for it. The fields are fully customisable per collection.</div></details>
+      <details class="faq"><summary>Are my collections private by default?<span class="plus">+</span></summary><div class="a">Yes. New collections start private and only you can see them. Publishing a gallery is a deliberate, reversible choice — and unpublished collections never appear in search or discover.</div></details>
+      <details class="faq"><summary>How does copying another collection work?<span class="plus">+</span></summary><div class="a">On any public collection, hit Copy. You get the field structure (and public items where the owner allows), then you adapt and fill it with your own data. Lineage is tracked so creators are credited for templates others reuse.</div></details>
+      <details class="faq"><summary>What happens to my data if I cancel Premium?<span class="plus">+</span></summary><div class="a">Nothing is deleted. You drop back to free limits and lose Premium-only themes — but every item, image and field stays intact. Export is available any time, even on free.</div></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:30px">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Ready to organise your collection?</h2>
+      <p>Join a growing community of collectors who trust collectd to track, showcase and share their passions.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#">Create your free account →</a>
+        <a class="btn btn-ghost" href="#">Compare plans</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" style="font-size:20px" href="#"><span class="mark" style="width:28px;height:28px"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="foot-links"><a href="#">Discover</a><a href="#">Pricing</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Contact</a></div>
+    <div class="foot-legal">© 2026 collectd · Satiate Studio Ltd</div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'})
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
+  // hero already visible
+  document.querySelectorAll('header.hero .reveal').forEach(el=>el.classList.add('in'))
+  document.querySelectorAll('a.btn').forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();const t=b.textContent.trim();b.textContent='✓ '+(t.includes('account')?'Mockup — would create account':t)+' (mockup)';setTimeout(()=>b.textContent=t,1400)})})
+</script>
+</body>
+</html>

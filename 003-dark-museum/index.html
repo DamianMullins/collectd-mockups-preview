@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collectd — Dark Museum (redesign sketch 003)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#12100c; --bg2:#1a1712; --surface:#201c15; --surface-2:#2a251b;
+    --border:#38311f; --ink:#efe9da; --muted:#a89e87; --faint:#7d7460;
+    --gold:#c8a04a; --gold-2:#e6c878; --green:#5f9d68;
+    --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-serif:'Cormorant Garamond',Georgia,serif;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+  .kicker{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+
+  nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:30px;height:72px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-serif);font-weight:600;font-size:25px;letter-spacing:.02em}
+  .logo .ll{color:var(--gold)}
+  .mark{width:30px;height:30px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;gap:2.5px;transform:rotate(45deg)}
+  .mark i{display:block;width:2.5px;height:12px;background:var(--gold);transform:rotate(-45deg);border-radius:2px}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted);letter-spacing:.02em}
+  .nav-links a:hover{color:var(--gold-2)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:18px;font-size:14px}
+  .btn{display:inline-flex;align-items:center;gap:9px;border-radius:3px;font-weight:600;font-size:13.5px;padding:11px 22px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;border:1px solid transparent}
+  .btn-primary{background:var(--gold);color:#201a0a;box-shadow:0 8px 26px -10px rgba(200,160,74,.5)}
+  .btn-primary:hover{background:var(--gold-2);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--border);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-2)}
+  .btn-sm{padding:8px 16px;font-size:12px}
+
+  /* hero */
+  header.hero{position:relative;padding:110px 0 60px;overflow:hidden}
+  .vignette{position:absolute;inset:0;pointer-events:none;background:
+    radial-gradient(1100px 620px at 50% -12%,rgba(200,160,74,.13),transparent 60%),
+    radial-gradient(900px 700px at 88% 30%,rgba(95,157,104,.07),transparent 60%)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+  .no{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:15px;letter-spacing:.04em}
+  h1.hero-title{font-family:var(--font-serif);font-weight:500;font-size:clamp(52px,6vw,86px);line-height:1.02;letter-spacing:-.01em;margin-top:18px;text-wrap:balance}
+  h1 .it{font-style:italic;color:var(--gold)}
+  .rule{width:64px;height:1px;background:var(--gold);margin:30px 0}
+  .hero-sub{color:var(--muted);font-size:17.5px;max-width:50ch;text-wrap:pretty}
+  .hero-sub b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap}
+  .hero-foot{margin-top:46px;display:flex;gap:44px;border-top:1px solid var(--border);padding-top:22px}
+  .hf b{font-family:var(--font-serif);font-weight:600;font-size:22px;color:var(--gold-2);display:block}
+  .hf span{font-size:12px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase}
+
+  /* framed wall */
+  .wall{position:relative;height:620px}
+  .frame{position:absolute;background:var(--surface);border:1px solid #4a412c;box-shadow:0 40px 70px -30px rgba(0,0,0,.75),inset 0 0 0 6px #1a1712;padding:10px;transition:transform .5s cubic-bezier(.2,.7,.3,1.1),z-index 0s,box-shadow .4s}
+  .frame img{display:block;width:100%;height:100%;object-fit:cover}
+  .frame:hover{transform:scale(1.05) rotate(0deg) !important;z-index:30;box-shadow:0 50px 90px -30px rgba(0,0,0,.9),0 0 0 1px var(--gold),inset 0 0 0 6px #1a1712}
+  .frame:hover .tag-line{color:#241d0d}
+  .frame .tag-line{position:absolute;left:14px;right:14px;bottom:14px;text-align:left;font-family:var(--font-serif);font-style:italic;font-size:14.5px;color:var(--ink);background:rgba(239,233,218,.94);border-radius:2px;padding:6px 10px;box-shadow:0 8px 18px -6px rgba(0,0,0,.5);pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fr-main{width:276px;height:360px;top:24px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:5}
+  .fr-1{width:180px;height:232px;top:30px;left:0;transform:rotate(-4deg);z-index:3;animation:drift1 9s ease-in-out infinite}
+  .fr-2{width:170px;height:218px;bottom:8px;left:4%;transform:rotate(2deg);z-index:4;animation:drift2 10s ease-in-out infinite 1s}
+  .fr-3{width:180px;height:232px;top:18px;right:0;transform:rotate(3.5deg);z-index:3;animation:drift1 8.5s ease-in-out infinite 1.6s}
+  .fr-4{width:160px;height:206px;bottom:16px;right:3%;transform:rotate(-2deg);z-index:4;animation:drift2 9.5s ease-in-out infinite .5s}
+  @keyframes drift1{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-10px)}}
+  @keyframes drift2{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-9px)}}
+  .wall-plinth{position:absolute;left:50%;transform:translateX(-50%);bottom:-46px;width:66%;height:14px;background:linear-gradient(180deg,#2e2a1f,#201c15);border:1px solid var(--border);box-shadow:0 30px 50px -20px rgba(0,0,0,.6)}
+  .wall-plinth::after{content:"";position:absolute;top:-8px;left:8%;right:8%;height:8px;background:linear-gradient(180deg,#3a3424,transparent)}
+  .halo{position:absolute;width:420px;height:420px;border-radius:50%;top:110px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(200,160,74,.16),transparent 62%);filter:blur(8px);z-index:1;pointer-events:none}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .rs{opacity:0;animation:fadeIn 1.1s ease forwards}
+  .rs-1{animation-delay:.1s}.rs-2{animation-delay:.3s}.rs-3{animation-delay:.5s}
+
+  /* disciplines ticker */
+  .disc{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:80px;overflow:hidden;padding:26px 0}
+  .disc-track{display:flex;gap:56px;width:max-content;animation:discmarq 30s linear infinite;font-family:var(--font-serif);font-size:24px;font-style:italic;color:var(--muted);align-items:center}
+  .disc-track .g{color:var(--gold)}
+  .disc-track em{color:var(--faint);font-size:18px;font-style:normal}
+  @keyframes discmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  section{padding:100px 0}
+  .sec-head{max-width:640px}
+  .sec-head h2{font-family:var(--font-serif);font-weight:500;font-size:clamp(36px,4.4vw,56px);line-height:1.05;margin-top:16px;letter-spacing:-.005em}
+  .sec-head p{margin-top:18px;color:var(--muted);font-size:16.5px}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* the "rooms" = editorial features with different bg tones */
+  .room{padding:110px 0;border-top:1px solid var(--border)}
+  .room-in{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .room h3{font-family:var(--font-serif);font-weight:500;font-size:clamp(28px,3vw,40px);line-height:1.1;margin-top:14px}
+  .room p{margin-top:18px;color:var(--muted);font-size:16px;max-width:54ch}
+  .room .lead{font-family:var(--font-serif);font-style:italic;font-size:20px;color:var(--gold-2);display:block;margin-top:26px}
+  .room ul{list-style:none;margin-top:22px}
+  .room li{display:flex;gap:14px;padding:9px 0;font-size:15px;color:var(--ink);align-items:baseline}
+  .room li::before{content:"◆";color:var(--gold);font-size:9px;flex:none;transform:translateY(-2px)}
+  .plate{position:relative;display:flex;align-items:center;justify-content:center;min-height:420px}
+  .plate img{max-width:88%;border-radius:4px;box-shadow:0 50px 80px -35px rgba(0,0,0,.8),0 0 0 1px #3a3424;transition:transform .6s cubic-bezier(.2,.7,.3,1.2)}
+  .plate:hover img{transform:scale(1.03)}
+  .plate .medallion{position:absolute;width:104px;height:104px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px);box-shadow:0 16px 40px -16px rgba(0,0,0,.8)}
+  .med-1{top:8%;right:6%}.med-2{bottom:6%;left:6%}
+  .medallion .inner{text-align:center;font-family:var(--font-serif)}
+  .medallion .inner b{display:block;font-size:22px;color:var(--gold-2);font-weight:600;line-height:1}
+  .medallion .inner span{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:4px;display:block}
+  .room.tone-b{background:var(--bg2)}
+
+  /* catalog strip — image bands */
+  .catalog{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border)}
+  .cat{position:relative;aspect-ratio:1/1;overflow:hidden;cursor:pointer;transition:flex-grow .4s}
+  .cat img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:.5s}
+  .cat:hover img{transform:scale(1.07);filter:saturate(1.05)}
+  .cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,8,5,.82))}
+  .cat .name{position:absolute;left:16px;right:12px;bottom:14px;z-index:2;font-family:var(--font-serif);font-style:italic;font-size:16px}
+  .cat .count{position:absolute;top:12px;right:12px;z-index:2;font-size:10.5px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(200,160,74,.5);border-radius:999px;padding:3px 9px;background:rgba(12,10,6,.5);backdrop-filter:blur(4px)}
+
+  /* quote band */
+  .quote-band{padding:0}
+  .qb-in{max-width:900px;margin:0 auto;text-align:center;padding:90px 20px}
+  .qb-in .big-q{font-family:var(--font-serif);font-size:clamp(30px,3.6vw,46px);line-height:1.3;font-style:italic;color:#efe4c8}
+  .qb-in .big-q b{color:var(--gold-2)}
+  .qb-who{margin-top:28px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .qb-who .sep{color:var(--gold);margin:0 10px}
+
+  /* premium — the vault */
+  .vault{background:linear-gradient(160deg,#1b1710,#14110b);border:1px solid #4a412c;border-radius:6px;padding:80px 70px;position:relative;overflow:hidden}
+  .vault::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 380px at 85% -15%,rgba(200,160,74,.15),transparent 55%)}
+  .vault h2{font-family:var(--font-serif);font-weight:500;font-size:clamp(34px,4vw,52px);margin-top:16px}
+  .vault .lead{color:var(--muted);margin-top:16px;max-width:56ch;font-size:16.5px}
+  .vault-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px;position:relative;z-index:1}
+  .vault-item{border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 55%,transparent);padding:26px}
+  .vault-item .roman{font-family:var(--font-serif);color:var(--gold);font-size:15px;display:block;margin-bottom:16px}
+  .vault-item b{font-size:17px;font-weight:600;display:block}
+  .vault-item p{color:var(--muted);font-size:13.5px;margin-top:10px;line-height:1.6}
+  .vault .btn-primary{margin-top:48px;position:relative;z-index:1}
+
+  /* faq */
+  .faq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:56px}
+  .faq{border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 60%,transparent);padding:26px 28px}
+  .faq summary{list-style:none;cursor:pointer;font-family:var(--font-serif);font-size:20px;font-weight:600;display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .x{color:var(--gold);font-family:var(--font-ui);font-size:20px;transition:transform .3s}
+  .faq[open] summary .x{transform:rotate(45deg)}
+  .faq .a{color:var(--muted);font-size:15px;margin-top:14px}
+
+  /* final cta */
+  .final-cta{text-align:center;padding:120px 20px 140px;position:relative;overflow:hidden}
+  .final-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 50% 110%,rgba(200,160,74,.14),transparent 65%)}
+  .final-cta .kicker{position:relative}
+  .final-cta h2{font-family:var(--font-serif);font-weight:500;font-size:clamp(40px,5vw,68px);margin-top:18px;position:relative}
+  .final-cta p{color:var(--muted);max-width:48ch;margin:22px auto 0;font-size:17px;position:relative}
+  .final-cta .hero-cta{justify-content:center;margin-top:40px;position:relative}
+
+  footer{border-top:1px solid var(--border);padding:40px 0 60px}
+  .foot-in{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+  .foot-links{display:flex;gap:26px;font-size:13.5px;color:var(--muted)}
+  .foot-links a:hover{color:var(--gold-2)}
+  .foot-legal{width:100%;text-align:center;color:var(--faint);font-size:12.5px;margin-top:22px}
+
+  @media(max-width:1000px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .wall{max-width:620px;margin:0 auto}
+    .room-in{grid-template-columns:1fr;gap:50px}
+    .catalog{grid-template-columns:repeat(3,1fr)}
+    .vault-grid{grid-template-columns:1fr 1fr}
+    .faq-wrap{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .vault{padding:56px 34px}
+  }
+  @media(max-width:600px){.catalog{grid-template-columns:repeat(2,1fr)}.vault-grid{grid-template-columns:1fr}.fr-1,.fr-4{display:none}.wall{height:520px}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="nav-links">
+      <a href="#rooms">The rooms</a>
+      <a href="#catalog">Catalogues</a>
+      <a href="#vault">The vault</a>
+      <a href="#faq">Field notes</a>
+    </div>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#">Begin a collection</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="vignette"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="no rs rs-1">Est. for the passionate · MMXXVI</span>
+      <h1 class="hero-title rs rs-1">A museum for the things <span class="it">you</span> keep.</h1>
+      <div class="rule rs rs-2"></div>
+      <p class="hero-sub rs rs-2">collectd is a home for collections — <b>built by collectors</b>, for trading cards, comics, vinyl, sneakers, cameras and every rabbit hole in between. Catalogue the detail, then hang it on the wall for the world to see.</p>
+      <div class="hero-cta rs rs-3">
+        <a class="btn btn-primary" href="#">Open your collection</a>
+        <a class="btn btn-ghost" href="#">Wander the halls</a>
+      </div>
+      <div class="hero-foot rs rs-3">
+        <div class="hf"><b>14,206</b><span>collections</span></div>
+        <div class="hf"><b>1.2M</b><span>items catalogued</span></div>
+        <div class="hf"><b>4.9★</b><span>community rated</span></div>
+      </div>
+    </div>
+    <div class="wall rs rs-3">
+      <div class="halo"></div>
+      <div class="frame fr-1"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=460&q=65&auto=format&fit=crop" alt="Sneaker"><span class="tag-line">Air Jordan 4 · 2019</span></div>
+      <div class="frame fr-2"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=420&q=65&auto=format&fit=crop" alt="Comic"><span class="tag-line">Amazing Spider-Man #1</span></div>
+      <div class="frame fr-main"><img src="https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=560&q=70&auto=format&fit=crop" alt="Vinyl"><span class="tag-line">The Sunday Shelf — 214 LPs</span></div>
+      <div class="frame fr-3"><img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=460&q=65&auto=format&fit=crop" alt="Action figure"><span class="tag-line">He-Man · mint on card</span></div>
+      <div class="frame fr-4"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&q=60&auto=format&fit=crop" alt="Camera"><span class="tag-line">Pentax K1000 · 1976</span></div>
+      <div class="wall-plinth"></div>
+    </div>
+  </div>
+
+  <div class="disc">
+    <div class="disc-track">
+      <span>Trading Cards <em>—</em> <span class="g">2,481 collections</span></span>
+      <span>Comics <em>—</em> <span class="g">1,209</span></span>
+      <span>Sneakers <em>—</em> <span class="g">3,872</span></span>
+      <span>Vinyl <em>—</em> <span class="g">1,664</span></span>
+      <span>Cameras <em>—</em> <span class="g">842</span></span>
+      <span>LEGO <em>—</em> <span class="g">1,933</span></span>
+      <span>Watches <em>—</em> <span class="g">907</span></span>
+      <span>Coins &amp; Stamps <em>—</em> <span class="g">688</span></span>
+      <span>Trading Cards <em>—</em> <span class="g">2,481 collections</span></span>
+      <span>Comics <em>—</em> <span class="g">1,209</span></span>
+      <span>Sneakers <em>—</em> <span class="g">3,872</span></span>
+      <span>Vinyl <em>—</em> <span class="g">1,664</span></span>
+      <span>Cameras <em>—</em> <span class="g">842</span></span>
+      <span>LEGO <em>—</em> <span class="g">1,933</span></span>
+      <span>Watches <em>—</em> <span class="g">907</span></span>
+      <span>Coins &amp; Stamps <em>—</em> <span class="g">688</span></span>
+    </div>
+  </div>
+</header>
+
+<section id="rooms" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">The rooms</span>
+      <h2>Three wings, one obsession</h2>
+      <p>Wander the collection. Each wing does something no spreadsheet ever could.</p>
+    </div>
+  </div>
+</section>
+
+<div class="room">
+  <div class="wrap room-in">
+    <div class="reveal">
+      <span class="kicker">Wing I — Structure</span>
+      <h3>Fields that fit the object, not the other way round</h3>
+      <p>A sneaker wants size and box condition. A comic wants grade and pressing. A camera wants shutter count and service history. Design the fields per collection — text, numbers, dropdowns, dates, ratings — and photograph every piece.</p>
+      <span class="lead">“If you can collect it, you can catalogue it.”</span>
+      <ul>
+        <li>Custom field types, mixed freely</li>
+        <li>Up to 10 images per item, with captions</li>
+        <li>Copy a community template &amp; make it yours — lineage tracked</li>
+      </ul>
+    </div>
+    <div class="plate reveal">
+      <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=900&q=70&auto=format&fit=crop" alt="LEGO display">
+      <div class="medallion med-1"><div class="inner"><b>1,204</b><span>copies</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="room tone-b">
+  <div class="wrap room-in">
+    <div class="plate reveal">
+      <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=900&q=70&auto=format&fit=crop" alt="Sneaker closeup">
+      <div class="medallion med-2"><div class="inner"><b>38</b><span>pairs</span></div></div>
+    </div>
+    <div class="reveal">
+      <span class="kicker">Wing II — Display</span>
+      <h3>Galleries worth a second look</h3>
+      <p>Publish a collection and it becomes a gallery with its own URL — clean, fast, shareable. Four layouts from utilitarian table to dramatic showcase, plus themes and accent colours for Premium members.</p>
+      <span class="lead">“My shelf finally has a room of its own.”</span>
+      <ul>
+        <li>Grid · table · showcase · cards</li>
+        <li>Stars, views and community love</li>
+        <li>Private until you say otherwise</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="catalog" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Catalogue</span>
+      <h2>Halls worth visiting</h2>
+    </div>
+  </div>
+  <div class="wrap" style="max-width:1380px">
+    <div class="catalog reveal">
+      <div class="cat"><img src="https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=400&q=60&auto=format&fit=crop" alt=""><span class="count">1,664</span><span class="name">Vinyl &amp; wax</span></div>
+      <div class="cat"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=60&auto=format&fit=crop" alt=""><span class="count">3,872</span><span class="name">Sneakers</span></div>
+      <div class="cat"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400&q=60&auto=format&fit=crop" alt=""><span class="count">1,209</span><span class="name">Comics</span></div>
+      <div class="cat"><img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=400&q=60&auto=format&fit=crop" alt=""><span class="count">2,481</span><span class="name">Action figures</span></div>
+      <div class="cat"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&q=60&auto=format&fit=crop" alt=""><span class="count">842</span><span class="name">Cameras</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band">
+  <div class="qb-in reveal">
+    <p class="big-q">“I copied a community vinyl template, deleted the fields I didn't care about, and had my <b>entire shelf catalogued before the kettle boiled</b>.”</p>
+    <div class="qb-who">Marcus T. <span class="sep">◆</span> Vinyl · 214 LPs <span class="sep">◆</span> Bristol</div>
+  </div>
+</section>
+
+<section id="vault" style="padding-top:20px">
+  <div class="wrap">
+    <div class="vault reveal">
+      <span class="kicker">The vault</span>
+      <h2>Premium keepsakes</h2>
+      <p class="lead">Free opens the door. Premium gives the collection room to breathe — bigger limits, richer displays, and your data in your hands.</p>
+      <div class="vault-grid">
+        <div class="vault-item"><span class="roman">I</span><b>Expanded limits</b><p>3 → 50 collections, unlimited items, double the fields, up to 10 images per item.</p></div>
+        <div class="vault-item"><span class="roman">II</span><b>Gallery themes</b><p>Showcase layout, custom accents, cover art — make it unmistakably yours.</p></div>
+        <div class="vault-item"><span class="roman">III</span><b>Export &amp; import</b><p>CSV or JSON, anytime. Bulk-import years of backlog in an afternoon.</p></div>
+        <div class="vault-item"><span class="roman">IV</span><b>Analytics</b><p>Views, stars and trends — know what the community loves.</p></div>
+      </div>
+      <a class="btn btn-primary" href="#">See the plans</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Field notes</span>
+      <h2>Asked &amp; answered</h2>
+    </div>
+    <div class="faq-wrap reveal">
+      <details class="faq"><summary>What can I collect here?<span class="x">+</span></summary><div class="a">Anything with catalogue logic — cards, comics, sneakers, vinyl, cameras, LEGO, coins, figures. Fields are fully customisable per collection.</div></details>
+      <details class="faq"><summary>Are my collections private?<span class="x">+</span></summary><div class="a">New collections start private. Publishing is deliberate and reversible, and private collections never appear in search or discover.</div></details>
+      <details class="faq"><summary>How does copying work?<span class="x">+</span></summary><div class="a">Copy any public collection to get its field structure, then make it yours. Lineage is tracked so creators are credited.</div></details>
+      <details class="faq"><summary>What if I cancel Premium?<span class="x">+</span></summary><div class="a">Nothing is deleted. You return to free limits and lose Premium-only themes — items, images and fields stay intact.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <span class="kicker reveal">The doors are open</span>
+  <h2 class="reveal">Begin your collection.</h2>
+  <p class="reveal">Free to start. No card required. Your first catalogue is an afternoon away.</p>
+  <div class="hero-cta reveal">
+    <a class="btn btn-primary" href="#">Create your account</a>
+    <a class="btn btn-ghost" href="#">Visit the pricing hall</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" style="font-size:22px" href="#"><span class="mark" style="width:26px;height:26px"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="foot-links"><a href="#">Discover</a><a href="#">Pricing</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Contact</a></div>
+    <div class="foot-legal">© 2026 collectd · Satiate Studio Ltd</div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -6% 0px'})
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
+  document.querySelectorAll('a.btn').forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();const t=b.textContent.trim();b.textContent='✓ '+(t.toLowerCase().includes('account')||t.toLowerCase().includes('open')?'Mockup — would start signup':t)+' (mockup)';setTimeout(()=>b.textContent=t,1400)})})
+</script>
+</body>
+</html>
