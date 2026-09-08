@@ -121,12 +121,12 @@
   .checklist{margin-top:22px;list-style:none}
   .checklist li{display:flex;gap:12px;align-items:center;padding:8px 0;font-size:15px;font-weight:500}
   .checklist .ck{width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--primary-2) 16%,white);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;font-weight:800}
-  .vis{position:relative}
-  .vis .ph{width:100%;border-radius:22px;border:1px solid var(--border);box-shadow:0 34px 60px -30px rgba(28,43,32,.4)}
+  .vis{position:relative;isolation:isolate}
+  .vis .ph{width:100%;border-radius:22px;border:1px solid var(--border);box-shadow:0 34px 60px -30px rgba(28,43,32,.4);position:relative;z-index:1}
   .vis.round .ph{border-radius:50%}
   .vis-ratio-tall .ph{aspect-ratio:4/5;object-fit:cover}
   .vis-ratio-wide .ph{aspect-ratio:4/3.4;object-fit:cover}
-  .ring{border:2px dashed color-mix(in srgb,var(--primary) 45%,transparent);border-radius:999px;position:absolute}
+  .ring{border:2px dashed color-mix(in srgb,var(--primary) 45%,transparent);border-radius:999px;position:absolute;z-index:0}
   .chip{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:13px;box-shadow:0 16px 34px -18px rgba(28,43,32,.4);padding:11px 15px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:center;backdrop-filter:blur(4px)}
   .chip small{display:block;font-weight:500;color:var(--faint)}
   .chip .sw{width:22px;height:22px;border-radius:7px;flex:none}
