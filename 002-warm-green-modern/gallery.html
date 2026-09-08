@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jordan Wall — 38 Pairs by @solecollector | Collectd (gallery mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f5f2ea; --ink:#1c2b20; --surface:#fdfbf4; --surface-2:#ece7d9;
+    --border:#ddd6c4; --primary:#2e6b3f; --primary-2:#429a53; --primary-ink:#1d4a2c;
+    --muted:#5d6a5e; --faint:#8a948b; --warm:#c98a55;
+    --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-serif:'Newsreader',Georgia,serif;
+    --radius:16px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+
+  nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:26px;height:70px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-serif);font-weight:700;font-size:23px;letter-spacing:-.02em}
+  .logo .ll{color:var(--primary-2)}
+  .mark{width:32px;height:32px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;gap:3px;flex:none;box-shadow:0 4px 12px -3px rgba(46,107,63,.5)}
+  .mark i{display:block;width:3.5px;height:15px;background:#f4f9f0;border-radius:2px}
+  .nav-links{display:flex;gap:24px;font-size:14.5px;color:var(--muted);margin-left:6px}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:14.5px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;font-weight:600;font-size:13.5px;padding:9px 16px;border:1px solid var(--border);cursor:pointer;transition:all .15s;white-space:nowrap;background:var(--surface);color:var(--ink);font-family:inherit}
+  .btn:hover{transform:translateY(-1px);border-color:var(--primary);color:var(--primary)}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--primary);color:#f2f8ef;border-color:var(--primary);box-shadow:0 8px 20px -10px rgba(46,107,63,.55)}
+  .btn-primary:hover{background:var(--primary-ink);color:#f2f8ef}
+  .btn-sm{padding:7px 13px;font-size:13px;border-radius:10px}
+
+  /* cover banner */
+  .banner{position:relative;height:430px;overflow:hidden;background:#1d2a20}
+  .banner img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.92)}
+  .banner .wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,22,17,.2) 0%,rgba(15,22,17,.12) 40%,rgba(21,26,22,.9) 100%)}
+  .banner-in{position:absolute;left:0;right:0;bottom:0;max-width:1200px;margin:0 auto;padding:0 28px 38px;color:#f4f1e6}
+  .crumb{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:rgba(244,241,230,.75);font-weight:600;margin-bottom:14px}
+  .crumb a:hover{color:#fff}
+  .crumb .sep{opacity:.5}
+  h1.g-name{font-family:var(--font-serif);font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.4)}
+  .g-by{margin-top:10px;font-size:15px;color:rgba(244,241,230,.85);display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+  .g-by a.owner{color:#fff;font-weight:700}
+  .g-by a.owner:hover{text-decoration:underline}
+  .g-desc{margin-top:12px;max-width:600px;font-size:14.5px;color:rgba(244,241,230,.85);line-height:1.6}
+  .g-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .g-tag{font-size:12px;font-weight:700;color:rgba(244,241,230,.9);border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);backdrop-filter:blur(4px);border-radius:999px;padding:5px 13px;transition:.15s}
+  .g-tag:hover{background:rgba(255,255,255,.22);color:#fff}
+  .prem{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(120deg,#c98a55,#a5673a);color:#2b1c0e;font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:3px 10px;text-transform:uppercase}
+
+  /* social bar */
+  .social{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;margin:22px 0 8px}
+  .soc-left{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;font-weight:600;flex-wrap:wrap}
+  .soc-left .sep{opacity:.4;margin:0 2px}
+  .soc-left b{color:var(--ink)}
+  .soc-right{display:flex;gap:10px;flex-wrap:wrap}
+  .stat-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:8px 15px;font-size:13.5px;font-weight:700;cursor:pointer;transition:.15s;color:var(--ink)}
+  .stat-chip:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+  .stat-chip.on{border-color:#d8b36a;background:#f7ecd2;color:#8a6a1f}
+  .stat-chip .ic{font-size:14px}
+  .stat-chip .n{color:var(--faint);font-weight:600}
+  .stat-chip.on .n{color:#a07b1f}
+  .btn-share{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:8px 15px;font-size:13.5px;font-weight:700;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .btn-share:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+
+  /* section head */
+  .shelf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:34px 0 6px}
+  .shelf-head .title h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.015em}
+  .shelf-head .title p{color:var(--faint);font-size:13.5px;margin-top:2px}
+  .view-toggle{display:inline-flex;align-items:center;gap:3px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:4px}
+  .view-toggle button{border:none;background:none;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:9px;cursor:pointer;color:var(--faint);transition:.15s;text-transform:uppercase}
+  .view-toggle button.active{background:var(--surface);color:var(--primary);box-shadow:0 3px 10px -4px rgba(28,43,32,.3)}
+  .view-toggle button:not(.active):hover{color:var(--muted)}
+
+  /* item grid */
+  .items{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
+  .item{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.22s}
+  .item:hover{transform:translateY(-4px);box-shadow:0 24px 44px -24px rgba(28,43,32,.35);border-color:rgba(46,107,63,.3)}
+  .item .art{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--surface-2)}
+  .item .art img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1.1)}
+  .item:hover .art img{transform:scale(1.05)}
+  .item .cond{position:absolute;top:10px;right:10px;font-size:10.5px;font-weight:800;letter-spacing:.04em;background:rgba(253,251,244,.94);color:#1d4a2c;border-radius:999px;padding:3px 9px;backdrop-filter:blur(3px)}
+  .item .star-mini{position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(253,251,244,.94);cursor:pointer;font-size:13px;transition:.15s;display:flex;align-items:center;justify-content:center}
+  .item .star-mini:hover{transform:scale(1.12)}
+  .item .star-mini.on{background:#f7ecd2}
+  .item .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .item .t-title{font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+  .item .t-sub{font-size:13px;color:var(--muted)}
+  .item .t-fields{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--border);padding-top:10px}
+  .field-chip{display:inline-flex;gap:5px;font-size:11px;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:3px 8px}
+  .field-chip b{color:var(--ink);font-weight:700}
+  .field-chip.accent{background:color-mix(in srgb,var(--warm) 12%,white);border-color:color-mix(in srgb,var(--warm) 30%,var(--border));color:#7a4a24}
+  .field-chip.accent b{color:#5a3314}
+
+  /* featured */
+  .featured{margin-top:22px;background:linear-gradient(150deg,#e9dcc4,#dfc9a4);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+  .featured .art{position:relative;min-height:320px;overflow:hidden}
+  .featured .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .featured:hover .art img{transform:scale(1.03)}
+  .featured .f-flag{position:absolute;top:14px;left:14px;background:var(--warm);color:#2b1c0e;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 12px;box-shadow:0 6px 16px -6px rgba(201,138,85,.8)}
+  .featured .body{padding:34px 36px;display:flex;flex-direction:column;justify-content:center}
+  .featured .body .kicker2{color:#8a5a33}
+  .featured .body h3{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,2.8vw,34px);line-height:1.12;margin-top:8px}
+  .featured .body .sub{color:#6d5136;margin-top:10px;font-size:15px;max-width:46ch}
+  .featured .body .f-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .featured .body .btn{margin-top:26px;align-self:flex-start}
+  .fchip{font-size:12px;font-weight:700;background:rgba(253,251,244,.75);border:1px solid rgba(122,74,36,.25);color:#5a3314;border-radius:10px;padding:6px 12px;display:inline-flex;gap:6px}
+  .fchip b{font-weight:800}
+
+  /* owner */
+  .owner-strip{display:flex;align-items:center;gap:14px;margin-top:44px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 22px;flex-wrap:wrap}
+  .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#429a53,#1d4a2c);display:flex;align-items:center;justify-content:center;color:#f4f9f0;font-family:var(--font-serif);font-weight:700;font-size:21px;flex:none}
+  .owner-strip .who{flex:1;min-width:180px}
+  .owner-strip .who b{font-size:15.5px}
+  .owner-strip .who p{font-size:13px;color:var(--faint)}
+  .owner-strip .btn{margin-left:auto}
+  .lineage{margin-top:10px;font-size:13px;color:var(--faint)}
+  .lineage a{color:var(--primary);font-weight:600}
+
+  /* copy cta */
+  .copy-band{margin-top:56px;text-align:center}
+  .copy-box{background:linear-gradient(150deg,#1d4a2c,#163621);color:#eaf2e6;border-radius:26px;padding:58px 36px;position:relative;overflow:hidden}
+  .copy-box::before{content:"";position:absolute;inset:0;background:radial-gradient(520px 300px at 85% -10%,rgba(66,154,83,.4),transparent 60%)}
+  .copy-box h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(28px,3.4vw,42px);position:relative}
+  .copy-box p{color:#b9d4bb;max-width:50ch;margin:14px auto 0;position:relative}
+  .copy-box .btn{margin-top:30px;position:relative;background:#f2f8ef;color:#1d4a2c;border-color:#f2f8ef}
+  .copy-box .btn:hover{background:#fff;border-color:#fff}
+
+  footer{border-top:1px solid var(--border);margin-top:70px;padding:36px 0 56px;background:var(--bg)}
+  .foot-in{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+  .foot-links{display:flex;gap:22px;font-size:13.5px;color:var(--muted)}
+  .foot-links a:hover{color:var(--primary)}
+  .foot-legal{font-size:12.5px;color:var(--faint);text-align:center;margin-top:18px;width:100%}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,80px);background:#1d4a2c;color:#eaf2e6;padding:12px 20px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 18px 44px -14px rgba(22,54,33,.6);z-index:99;transition:transform .35s cubic-bezier(.2,.7,.3,1.1);opacity:0;pointer-events:none}
+  .toast.show{transform:translate(-50%,0);opacity:1}
+
+  @media(max-width:1000px){.items{grid-template-columns:repeat(3,1fr)}.featured{grid-template-columns:1fr}.nav-links{display:none}.banner{height:390px}}
+  @media(max-width:720px){.items{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.items{grid-template-columns:1fr}.soc-left{width:100%}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="nav-links">
+      <a href="#">Discover</a>
+      <a href="#">Starred</a>
+      <a href="#">Pricing</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-sm" href="#">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#">Start your collection</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Cover banner -->
+<header class="banner">
+  <img class="bg" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1600&q=70&auto=format&fit=crop" alt="Sneaker wall cover">
+  <div class="wash"></div>
+  <div class="banner-in">
+    <div class="crumb"><a href="#">@solecollector</a><span class="sep">/</span><span>Jordan Wall</span></div>
+    <h1 class="g-name">Jordan Wall — 38 Pairs</h1>
+    <div class="g-by">
+      <span>by <a class="owner" href="#">@solecollector</a></span>
+      <span class="prem">✦ Premium</span>
+      <span>· 38 items · sneakers &amp; heat</span>
+    </div>
+    <p class="g-desc">Retro 1s through 14s with box condition, size runs and resale notes. Four grails and counting — every pair has a story.</p>
+    <div class="g-tags">
+      <a class="g-tag" href="#">Sneakers</a>
+      <a class="g-tag" href="#">Jordan</a>
+      <a class="g-tag" href="#">Deadstock</a>
+      <a class="g-tag" href="#">Grails</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- social bar -->
+  <div class="social reveal">
+    <div class="soc-left">
+      <span>👁 <b>18,640</b> views</span><span class="sep">·</span>
+      <span>copied from <a href="#" style="color:var(--primary);font-weight:700">@kicksfinder</a>'s "Retro Wall"</span>
+    </div>
+    <div class="soc-right">
+      <button class="stat-chip" id="starBtn"><span class="ic">☆</span> Star <span class="n" id="starCount">986</span></button>
+      <button class="stat-chip" id="copyBtn"><span class="ic">↗</span> Copy <span class="n" id="copyCount">241</span></button>
+      <button class="btn-share" id="shareBtn">🔗 Share</button>
+    </div>
+  </div>
+
+  <!-- featured -->
+  <div class="featured reveal">
+    <div class="art">
+      <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=1100&q=70&auto=format&fit=crop" alt="Featured item — the grail">
+      <span class="f-flag">★ Featured</span>
+    </div>
+    <div class="body">
+      <span class="kicker kicker2">Featured grail</span>
+      <h3>Air Jordan 4 Retro — "Bred" 2019</h3>
+      <p class="sub">The pair that started the wall. DS, original box and laces, bought on release day for retail — and still the crown jewel.</p>
+      <div class="f-row">
+        <span class="fchip">📏 <b>UK 9.5</b></span>
+        <span class="fchip">📦 <b>DS · OG box</b></span>
+        <span class="fchip">🗓️ <b>2019</b></span>
+        <span class="fchip">💷 <b>Retail: £175</b></span>
+      </div>
+      <button class="btn" id="itemStar1">☆ View item</button>
+    </div>
+  </div>
+
+  <!-- shelf header + view toggle -->
+  <div class="shelf-head reveal">
+    <div class="title">
+      <h2>Recent additions</h2>
+      <p>9 fields · custom template by @solecollector</p>
+    </div>
+    <div class="view-toggle">
+      <button>Grid</button>
+      <button class="active">Cards</button>
+      <button>Table</button>
+      <button>Showcase</button>
+    </div>
+  </div>
+
+  <!-- items grid -->
+  <div class="items" id="items">
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini on">★</button></div><div class="meta"><div class="t-title">Nike Air Max 1 "Sunset"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £120</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Puma Suede Classic</div><div class="t-sub">US 9.5 · 1980s reissue</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 9.5</span><span class="field-chip">💷 £65</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1539185441755-769473a23570?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">New Balance 990v3 "Olive"</div><div class="t-sub">US 10.5 · 2022</div><div class="t-fields"><span class="field-chip accent">✨ VNDS</span><span class="field-chip">📏 US 10.5</span><span class="field-chip">💷 £180</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Nike Dunk Low "Blue Chill"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £95</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">NB 574 "Grey Day"</div><div class="t-sub">US 9 · 2020</div><div class="t-fields"><span class="field-chip accent">✨ VNDS</span><span class="field-chip">📏 US 9</span><span class="field-chip">💷 £85</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Vans Old Skool "Maroon"</div><div class="t-sub">US 10.5 · 2019</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10.5</span><span class="field-chip">💷 £60</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Air Max 95 "Neon" 2020</div><div class="t-sub">US 10 · 2020</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £140</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Jordan 1 High "Court"</div><div class="t-sub">US 9.5 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 9.5</span><span class="field-chip">💷 £165</span></div></div></div>
+  </div>
+
+  <!-- owner -->
+  <div class="owner-strip reveal">
+    <div class="av">S</div>
+    <div class="who">
+      <b>solecollector</b>
+      <p>Collector · sneakers, streetwear &amp; coffee · London</p>
+      <div class="lineage">↳ Copied from <a href="#">@kicksfinder</a>'s "Retro Wall" · lineage tracked</div>
+    </div>
+    <a class="btn" href="#">View profile</a>
+    <button class="btn" id="followBtn">Follow</button>
+  </div>
+
+  <!-- copy cta -->
+  <div class="copy-band reveal">
+    <div class="copy-box">
+      <h2>Love this wall? Make it yours.</h2>
+      <p>Copy the whole template — fields, structure and public items — then build your own from a head start.</p>
+      <button class="btn" id="copyCta">↗ Copy this collection</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" style="font-size:20px" href="#"><span class="mark" style="width:28px;height:28px"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+    <div class="foot-links"><a href="#">Discover</a><a href="#">Pricing</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Contact</a></div>
+    <div class="foot-legal">© 2026 collectd · Satiate Studio Ltd</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4% 0px'})
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
+
+  function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2200)}
+
+  // star toggles
+  const starBtn=document.getElementById('starBtn'), starCount=document.getElementById('starCount')
+  let starred=false, stars=986
+  starBtn.addEventListener('click',()=>{starred=!starred;stars+=starred?1:-1;starBtn.classList.toggle('on',starred);starBtn.querySelector('.ic').textContent=starred?'★':'☆';starCount.textContent=stars.toLocaleString();toast(starred?'Starred — nice pick':'Unstarred')})
+  document.querySelectorAll('.star-mini').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.classList.toggle('on');b.textContent=b.classList.contains('on')?'★':'☆'}))
+  document.getElementById('itemStar1').addEventListener('click',()=>toast('Mockup — would open the item detail page'))
+
+  // copy / share
+  let copied=false, copies=241
+  document.getElementById('copyBtn').addEventListener('click',()=>{copied=!copied;copies+=copied?1:-1;document.getElementById('copyCount').textContent=copies;toast(copied?'Collection copied to your account ✓':'Removed copy')})
+  document.getElementById('copyCta').addEventListener('click',()=>toast('Mockup — would open signup / copy flow'))
+  document.getElementById('shareBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://collectd.io/u/solecollector/jordan-wall');toast('Link copied to clipboard ✓')}catch(e){toast('Mockup — would copy https://collectd.io/u/solecollector/jordan-wall')}})
+  document.getElementById('followBtn').addEventListener('click',function(){const f=this.textContent==='Follow';this.textContent=f?'Following ✓':'Follow';this.classList.toggle('btn-primary',f);toast(f?'Following @solecollector':'Unfollowed')})
+
+  // view toggle feint
+  document.querySelectorAll('.view-toggle button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.view-toggle button').forEach(x=>x.classList.remove('active'));b.classList.add('active');toast('Mockup — '+b.textContent+' layout')})})
+  // generic cta feints
+  document.querySelectorAll('nav .btn, .owner-strip .btn:not(#followBtn)').forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();toast('Mockup — nav link')})})
+</script>
+</body>
+</html>
