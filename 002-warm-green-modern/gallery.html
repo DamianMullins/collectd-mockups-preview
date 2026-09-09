@@ -682,8 +682,8 @@
   document.addEventListener('keydown',e=>{
     if(!overlay.classList.contains('open'))return
     if(e.key==='Escape')closeModal()
-    if(e.key==='ArrowLeft')imageStep(-1)
-    if(e.key==='ArrowRight')imageStep(1)
+    if(e.key==='ArrowLeft')fillEntry(entryIdx-1)
+    if(e.key==='ArrowRight')fillEntry(entryIdx+1)
   })
   el.star.addEventListener('click',()=>{mStarred=!mStarred;el.star.classList.toggle('on',mStarred);toast(mStarred?'Item starred':'Item unstarred')})
   document.getElementById('mShare').addEventListener('click',()=>toast('Mockup — would share this item'))
