@@ -6,16 +6,35 @@
 <title>Jordan Wall — 38 Pairs by @solecollector | Collectd (gallery mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --bg:#f5f2ea; --ink:#1c2b20; --surface:#fdfbf4; --surface-2:#ece7d9;
-    --border:#ddd6c4; --primary:#2e6b3f; --primary-2:#429a53; --primary-ink:#1d4a2c;
-    --muted:#5d6a5e; --faint:#8a948b; --warm:#c98a55;
+    --bg:oklch(0.955 0.02 90);
+    --surface:oklch(0.985 0.012 90);
+    --surface-2:oklch(0.932 0.024 88);
+    --border:oklch(0.872 0.024 86);
+    --ink:oklch(0.2 0.035 70);
+    --muted:oklch(0.45 0.028 72);
+    --faint:oklch(0.58 0.02 76);
+    --primary:oklch(0.55 0.15 145);
+    --primary-2:oklch(0.46 0.13 145);
+    --primary-ink:#1d4a2c;
+    --on-accent:oklch(0.98 0 0);
+    --good:#429a53;
+    --warm:#c98a55; --warm-ink:#5a3314;
+    --chip-ink:#1d4a2c;
+    --gold:#8a6a1f;
     --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    --font-serif:'Newsreader',Georgia,serif;
+    --font-serif:'Literata',Georgia,serif;
     --radius:16px;
+  }
+  html.dark{
+    --bg:oklch(0.13 0.01 260); --surface:oklch(0.2 0.01 260); --surface-2:oklch(0.24 0.01 260);
+    --border:oklch(0.34 0.01 260); --ink:oklch(0.98 0 0); --muted:oklch(0.6 0 0); --faint:oklch(0.52 0 0);
+    --primary:oklch(0.7 0.15 145); --primary-2:oklch(0.8 0.14 145); --primary-ink:oklch(0.26 0.05 145);
+    --on-accent:oklch(0.13 0.01 260); --good:oklch(0.72 0.14 150);
+    --warm:#d09a66; --warm-ink:#e2b48b; --chip-ink:oklch(0.85 0.08 145); --gold:#e3c265;
   }
   html{scroll-behavior:smooth}
   body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -36,8 +55,8 @@
   .btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;font-weight:600;font-size:13.5px;padding:9px 16px;border:1px solid var(--border);cursor:pointer;transition:all .15s;white-space:nowrap;background:var(--surface);color:var(--ink);font-family:inherit}
   .btn:hover{transform:translateY(-1px);border-color:var(--primary);color:var(--primary)}
   .btn:active{transform:scale(.98)}
-  .btn-primary{background:var(--primary);color:#f2f8ef;border-color:var(--primary);box-shadow:0 8px 20px -10px rgba(46,107,63,.55)}
-  .btn-primary:hover{background:var(--primary-ink);color:#f2f8ef}
+  .btn-primary{background:var(--primary);color:var(--on-accent);border-color:var(--primary);box-shadow:0 8px 20px -10px color-mix(in srgb,var(--primary) 55%,transparent)}
+  .btn-primary:hover{background:var(--primary-2);color:var(--on-accent)}
   .btn-sm{padding:7px 13px;font-size:13px;border-radius:10px}
 
   /* cover banner */
@@ -70,26 +89,49 @@
   .stat-chip .ic{font-size:14px}
   .stat-chip .n{color:var(--faint);font-weight:600}
   .stat-chip.on .n{color:#a07b1f}
-  .btn-share{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:8px 15px;font-size:13.5px;font-weight:700;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .btn-share{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:8px 15px;font-size:13.5px;font-weight:700;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s;color:var(--ink)}
   .btn-share:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
 
   /* section head */
   .shelf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:34px 0 6px}
   .shelf-head .title h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.015em}
   .shelf-head .title p{color:var(--faint);font-size:13.5px;margin-top:2px}
-  .view-toggle{display:inline-flex;align-items:center;gap:3px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:4px}
-  .view-toggle button{border:none;background:none;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:9px;cursor:pointer;color:var(--faint);transition:.15s;text-transform:uppercase}
-  .view-toggle button.active{background:var(--surface);color:var(--primary);box-shadow:0 3px 10px -4px rgba(28,43,32,.3)}
-  .view-toggle button:not(.active):hover{color:var(--muted)}
+  .view-toggle,.fx-toggle{display:inline-flex;align-items:center;gap:3px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:4px}
+  .view-toggle button,.fx-toggle button{border:none;background:none;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:9px;cursor:pointer;color:var(--faint);transition:.15s;text-transform:uppercase}
+  .view-toggle button.active,.fx-toggle button.active{background:var(--surface);color:var(--primary);box-shadow:0 3px 10px -4px rgba(28,43,32,.3)}
+  .view-toggle button:not(.active):hover,.fx-toggle button:not(.active):hover{color:var(--muted)}
+  .fx-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:14px 0 0}
+  .fx-bar .fx-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .fx-swatches{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .fx-swatches .sw{width:20px;height:20px;border-radius:50%;border:1px solid color-mix(in srgb,var(--border) 60%,transparent);cursor:pointer;padding:0;transition:transform .15s,box-shadow .15s;background:var(--surface)}
+  .fx-swatches .sw:hover{transform:scale(1.18)}
+  .fx-swatches .sw.active{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}
+  .fx-swatches .sw-def{background:conic-gradient(from 180deg,var(--primary) 0 25%,var(--surface) 25% 50%,var(--primary) 50% 75%,var(--surface) 75%)}
+  /* card effects (mock preview of real holo/tilt effects) — none = truly no hover motion */
+  #items.fx-zoom .item:hover{transform:translateY(-4px);box-shadow:0 24px 44px -24px rgba(28,43,32,.35)}
+  #items.fx-zoom .item:hover .art img{transform:scale(1.05)}
+  #items.fx-holo .item .art::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.5) 40%,rgba(255,255,255,.16) 52%,transparent 64%);background-size:220% 100%;mix-blend-mode:screen;pointer-events:none;z-index:2;opacity:0;transition:opacity .25s}
+  #items.fx-holo .item:hover .art::after{opacity:1;animation:holo-sheen 1.3s ease-out 1}
+  #items.fx-holo .item:hover .art img{filter:saturate(1.12) contrast(1.04)}
+  @keyframes holo-sheen{from{background-position:215% 0}to{background-position:-45% 0}}
+  #items.fx-tilt .item:hover{transform:perspective(1100px) rotateX(1.5deg) rotateY(-2.6deg)}
+  #items.fx-tilt .item{transition:transform .18s ease,box-shadow .18s}
+  #items.fx-zoom .item:hover,#items.fx-holo .item:hover,#items.fx-tilt .item:hover{border-color:color-mix(in srgb,var(--primary) 60%,var(--border));box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 16%,transparent),0 18px 34px -22px rgba(28,43,32,.25)}
+  html.accent-on .modal-overlay{--primary:var(--accent-bar);--primary-2:var(--accent-bar)}
+  html.accent-on .banner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent-bar) 88%,white),var(--accent-bar));opacity:.95;z-index:3}
+  @media (max-width:560px){
+    .fx-bar{gap:10px}
+    .soc-right{gap:8px}
+    .soc-right .stat-chip,.soc-right .btn-share{padding:0;width:40px;height:40px;justify-content:center;border-radius:12px;position:relative}
+    .soc-right .stat-chip .lbl,.soc-right .stat-chip .n,.soc-right .btn-share .lbl{display:none}
+  }
 
   /* item grid */
   .items{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
   .item{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.22s}
-  .item:hover{transform:translateY(-4px);box-shadow:0 24px 44px -24px rgba(28,43,32,.35);border-color:rgba(46,107,63,.3)}
   .item .art{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--surface-2)}
   .item .art img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1.1)}
-  .item:hover .art img{transform:scale(1.05)}
-  .item .cond{position:absolute;top:10px;right:10px;font-size:10.5px;font-weight:800;letter-spacing:.04em;background:rgba(253,251,244,.94);color:#1d4a2c;border-radius:999px;padding:3px 9px;backdrop-filter:blur(3px)}
+  .item .cond{position:absolute;top:10px;right:10px;font-size:10.5px;font-weight:800;letter-spacing:.04em;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--ink);border-radius:999px;padding:3px 9px;backdrop-filter:blur(3px)}
   .item .star-mini{position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(253,251,244,.94);cursor:pointer;font-size:13px;transition:.15s;display:flex;align-items:center;justify-content:center}
   .item .star-mini:hover{transform:scale(1.12)}
   .item .star-mini.on{background:#f7ecd2}
@@ -99,23 +141,23 @@
   .item .t-fields{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--border);padding-top:10px}
   .field-chip{display:inline-flex;gap:5px;font-size:11px;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:3px 8px}
   .field-chip b{color:var(--ink);font-weight:700}
-  .field-chip.accent{background:color-mix(in srgb,var(--warm) 12%,white);border-color:color-mix(in srgb,var(--warm) 30%,var(--border));color:#7a4a24}
-  .field-chip.accent b{color:#5a3314}
+  .field-chip.accent{background:color-mix(in srgb,var(--warm) 16%,var(--surface));border-color:color-mix(in srgb,var(--warm) 38%,var(--border));color:var(--warm-ink)}
+  .field-chip.accent b{color:var(--warm-ink)}
 
   /* featured */
-  .featured{margin-top:22px;background:linear-gradient(150deg,#e9dcc4,#dfc9a4);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+  .featured{margin-top:22px;background:linear-gradient(150deg,color-mix(in srgb,var(--primary) 16%,var(--surface)),color-mix(in srgb,var(--primary) 6%,var(--surface-2)));border:1px solid var(--border);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
   .featured .art{position:relative;min-height:320px;overflow:hidden}
   .featured .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
   .featured:hover .art img{transform:scale(1.03)}
   .featured .f-flag{position:absolute;top:14px;left:14px;background:var(--warm);color:#2b1c0e;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 12px;box-shadow:0 6px 16px -6px rgba(201,138,85,.8)}
   .featured .body{padding:34px 36px;display:flex;flex-direction:column;justify-content:center}
-  .featured .body .kicker2{color:#8a5a33}
+  .featured .body .kicker2{color:var(--primary-2)}
   .featured .body h3{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,2.8vw,34px);line-height:1.12;margin-top:8px}
-  .featured .body .sub{color:#6d5136;margin-top:10px;font-size:15px;max-width:46ch}
+  .featured .body .sub{color:var(--muted);margin-top:10px;font-size:15px;max-width:46ch}
   .featured .body .f-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
   .featured .body .btn{margin-top:26px;align-self:flex-start}
-  .fchip{font-size:12px;font-weight:700;background:rgba(253,251,244,.75);border:1px solid rgba(122,74,36,.25);color:#5a3314;border-radius:10px;padding:6px 12px;display:inline-flex;gap:6px}
-  .fchip b{font-weight:800}
+  .fchip{font-size:12px;font-weight:700;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px solid color-mix(in srgb,var(--primary) 32%,var(--border));color:var(--muted);border-radius:10px;padding:6px 12px;display:inline-flex;gap:6px}
+  .fchip b{font-weight:800;color:var(--ink)}
 
   /* owner */
   .owner-strip{display:flex;align-items:center;gap:14px;margin-top:44px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 22px;flex-wrap:wrap}
@@ -164,9 +206,28 @@
   .modal-close{margin-left:auto;width:36px;height:36px;border-radius:12px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--muted);transition:.15s;flex:none}
   .modal-close:hover{border-color:#c05a4a;color:#b03a2a}
   .modal-body{overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;min-height:0}
-  .modal-art{position:relative;background:var(--surface-2);min-height:380px}
+  /* Pro upsell strip (mock): visitor view of a Pro-styled gallery. Real = upgrade-prompt pattern linking to ROUTES.pricing; max one, dismissible, never blocking. */
+  .upsell{display:flex;align-items:center;gap:12px;margin:18px 0 4px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--primary) 42%,var(--border));background:color-mix(in srgb,var(--primary) 10%,var(--surface));border-radius:16px;position:relative}
+  .upsell > i{flex:none;width:18px;height:18px;color:var(--primary)}
+  .upsell p{font-size:13.5px;line-height:1.45;color:var(--muted);margin:0}
+  .upsell p b{color:var(--ink);font-weight:800}
+  .upsell .btn{flex:none;margin-left:auto;padding:8px 15px;font-size:13px}
+  .upsell-x{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .upsell-x:hover{background:var(--surface-2)}
+  .upsell-x svg{width:14px;height:14px}
+  .upsell[hidden]{display:none}
+  .mi-actions .btn.reported{border-color:var(--primary);color:var(--primary);opacity:.9;cursor:default}
+  @media(max-width:560px){.upsell{flex-wrap:wrap;gap:8px}.upsell p{flex:1 1 100%;order:1}.upsell .btn{margin-left:0}}
+  .modal-art{position:relative;background:var(--surface-2);min-height:380px;overflow:hidden}
+  .img-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 90%,transparent);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;backdrop-filter:blur(3px);transition:.15s}
+  .img-arrow:hover{background:var(--surface);border-color:var(--primary);color:var(--primary)}
+  .img-arrow[hidden]{display:none}
+  .img-arrow svg{width:16px;height:16px}
+  .img-arrow.prev{left:12px}.img-arrow.next{right:12px}
+  #mImg{transition:transform .25s ease}
+  .modal-art img.main{will-change:transform}
   .modal-art img.main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .modal-art .cond-big{position:absolute;top:14px;left:14px;font-size:11px;font-weight:800;letter-spacing:.04em;background:rgba(253,251,244,.94);color:#1d4a2c;border-radius:999px;padding:4px 11px;backdrop-filter:blur(3px)}
+  .modal-art .cond-big{position:absolute;top:14px;left:14px;font-size:11px;font-weight:800;letter-spacing:.04em;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--ink);border-radius:999px;padding:4px 11px;backdrop-filter:blur(3px)}
   .modal-art .img-count{position:absolute;bottom:14px;right:14px;font-size:11px;font-weight:700;background:rgba(18,24,20,.55);color:#f4f1e6;border-radius:999px;padding:3px 10px;backdrop-filter:blur(3px)}
   .modal-art .star-big{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(253,251,244,.94);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.15s;backdrop-filter:blur(3px)}
   .modal-art .star-big:hover{transform:scale(1.1)}
@@ -181,29 +242,142 @@
   .mi-row:last-child{border-bottom:none}
   .mi-row .lbl{color:var(--faint);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex:none}
   .mi-row .val{font-weight:600;text-align:right}
-  .mi-row .val.accent{color:#7a4a24}
+  .mi-row .val.accent{color:var(--ink)}
   .modal-info .mi-actions{margin-top:auto;padding-top:22px;display:flex;gap:10px;flex-wrap:wrap}
   @media(max-width:760px){.modal-body{grid-template-columns:1fr}.modal-art{min-height:240px}}
+  /* ===== index.html parity (warm light / dark, header, icons, layout modes) ===== */
+  .btn{border-radius:999px;font-size:14px;padding:9px 17px}
+  .btn-sm{border-radius:999px;padding:7px 14px;font-size:13px}
+  .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--ink);transition:.2s;position:relative}
+  .theme-toggle:hover{border-color:var(--primary);transform:translateY(-1px)}
+  .theme-toggle .ic-sun{display:none}
+  html.dark .theme-toggle .ic-moon{display:none}
+  html.dark .theme-toggle .ic-sun{display:inline-flex}
+  .theme-toggle svg{width:16px;height:16px}
+  .nav-login{font-size:14px;color:var(--muted);transition:.2s}
+  .nav-login:hover{color:var(--primary-2)}
+  .nav-right .btn-sm{padding:7px 15px}
+  .mobile-burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--ink)}
+  .mobile-burger svg{width:18px;height:18px}
+  .mobile-panel{display:none;flex-direction:column;padding:8px 14px 16px;border-top:1px solid var(--border);background:var(--bg)}
+  nav.open .mobile-panel{display:flex}
+  .mobile-panel>a{padding:11px 12px;border-radius:10px;font-size:15px;font-weight:500;color:var(--ink)}
+  .mobile-panel>a:hover{background:var(--surface-2);color:var(--primary-2)}
+  .mobile-panel .mp-auth{display:flex;gap:10px;margin-top:12px;padding:0 12px}
+  .mobile-panel .mp-auth .btn{flex:1;justify-content:center}
+  .stat-chip svg,.btn-share svg{width:14px;height:14px;color:var(--faint);transition:color .15s}
+  .stat-chip:hover svg{color:var(--primary)}
+  .stat-chip.on svg{color:#b8912e;fill:currentColor}
+  html.dark .stat-chip.on svg{color:#e3c265}
+  .btn svg{width:14px;height:14px}
+  .prem svg{width:11px;height:11px}
+  .il{width:13px;height:13px;vertical-align:-1.5px;color:var(--muted)}
+  .fchip .il,.field-chip .il{vertical-align:-1px}
+  .field-chip{display:inline-flex;align-items:center;gap:5px}
+  .f-flag{display:inline-flex;align-items:center;gap:6px}
+  .f-flag svg{width:11px;height:11px;fill:currentColor}
+  .star-mini{display:flex;align-items:center;justify-content:center}
+  .star-mini svg{width:15px;height:15px;color:#b8912e}
+  .star-mini.on svg{fill:currentColor}
+  .star-big svg{width:18px;height:18px;color:#b8912e}
+  .star-big.on svg{fill:currentColor}
+  .navbtn svg{width:15px;height:15px}
+  .modal-close svg{width:16px;height:16px}
+  .cond,.modal-art .cond-big{background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--ink)}
+  html.dark .item .star-mini,html.dark .modal-art .star-big,html.dark .cond,html.dark .modal-art .cond-big{background:color-mix(in srgb,var(--surface) 92%,transparent)}
+  html.dark .stat-chip.on{background:rgba(216,179,106,.16);border-color:#b8912e;color:#e6c36f}
+  html.dark .stat-chip.on .n{color:#cfa94f}
+  html.dark .av{background:linear-gradient(135deg,#3e8f54,#16402a);color:#eaf6ee}
+
+  /* layout modes */
+  #items{transition:grid-template-columns .3s ease}
+  #items.view-grid{grid-template-columns:repeat(5,1fr);gap:12px}
+  #items.view-grid .item .t-fields{display:none}
+  #items.view-grid .item .t-sub{display:none}
+  #items.view-grid .item .meta{padding:10px 12px 12px;gap:0}
+  #items.view-grid .item .t-title{font-size:13.5px;line-height:1.25}
+  #items.view-grid .item .star-mini{display:none}
+  #items.view-table{grid-template-columns:1fr;gap:8px}
+  #items.view-table .item{flex-direction:row;align-items:center;gap:16px;border-radius:14px;padding:10px 14px}
+  #items.view-table .item .art{width:64px;height:64px;aspect-ratio:auto;flex:none;border-radius:10px}
+  #items.view-table .item .cond{top:auto;right:auto;left:auto;position:static}
+  #items.view-table .item .star-mini{display:none}
+  #items.view-table .item .meta{flex:1;flex-direction:row;align-items:center;flex-wrap:wrap;gap:6px 20px;padding:0}
+  #items.view-table .item .t-title{font-size:15px}
+  #items.view-table .item .t-sub{font-size:12.5px}
+  #items.view-table .item .t-fields{margin-top:0;border-top:none;padding-top:0}
+  #items.view-table .item:hover{transform:none}
+  #items.view-showcase{grid-template-columns:1fr 1fr;gap:26px}
+  #items.view-showcase .item{border-radius:24px}
+  #items.view-showcase .item .art{aspect-ratio:4/3}
+  #items.view-showcase .item .meta{padding:18px 20px 20px;gap:6px}
+  #items.view-showcase .item .t-title{font-size:20px}
+  #items.view-showcase .item .t-sub{font-size:14px}
+  @media(max-width:1000px){#items.view-grid{grid-template-columns:repeat(4,1fr)}#items.view-showcase{grid-template-columns:1fr}}
+  @media(max-width:760px){#items.view-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){#items.view-grid{grid-template-columns:1fr 1fr}}
+
+  /* Cards layout — parity with the real TradingCard component (mock note): full-bleed 3/4 cover,
+     accent-or-muted title plate on top that slides away on hover. No value chips, no condition
+     pill, no per-item star (none of those exist in the real cards component / data model). */
+  #items.view-cards{gap:16px}
+  #items.view-cards .item{position:relative;aspect-ratio:3/4;border-radius:14px;display:block;padding:0;background:var(--surface-2)}
+  #items.view-cards .item .art{position:absolute;inset:0;aspect-ratio:auto}
+  #items.view-cards .item .meta{position:absolute;left:0;right:0;top:0;padding:9px 16px;flex-direction:row;align-items:center;gap:0;flex:none;background:var(--muted);color:var(--ink);transition:transform .3s ease-out;z-index:3}
+  #items.view-cards .item:hover .meta{transform:translateY(-100%)}
+  #items.view-cards .item .t-title{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #items.view-cards .item .t-sub,#items.view-cards .item .t-fields,#items.view-cards .item .cond,#items.view-cards .item .star-mini{display:none!important}
+  html.accent-on #mainContent #items.view-cards .item .meta{background:color-mix(in srgb,var(--accent-bar) 82%,transparent);color:#fff}
+
+
+  /* footer parity */
+  footer{padding:44px 0 30px;background:var(--bg)}
+  .foot-grid{display:grid;grid-template-columns:minmax(220px,1.3fr) repeat(4,1fr);gap:32px;padding-bottom:34px}
+  .foot-brand .logo{font-size:20px}
+  .foot-brand p{color:var(--muted);font-size:13px;max-width:30ch;margin-top:10px;line-height:1.5}
+  .foot-col{display:flex;flex-direction:column;gap:8px}
+  .foot-col h3{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-2);margin-bottom:2px}
+  .foot-col a{color:var(--muted);font-size:13px;transition:color .2s}
+  .foot-col a:hover{color:var(--primary-2)}
+  .foot-legal{border-top:1px solid var(--border);padding-top:16px;font-size:12.5px;color:var(--faint);text-align:center}
+  @media(max-width:720px){.foot-grid{grid-template-columns:1fr 1fr;gap:24px}}
+  @media(max-width:560px){.nav-in{gap:10px;height:58px}.logo{font-size:20px;gap:8px}.mark{width:26px;height:26px;border-radius:8px}.theme-toggle{width:34px;height:34px}.nav-right{gap:10px}.nav-login{display:none}.mobile-burger{display:inline-flex}}
+
   @media(max-width:1000px){.items{grid-template-columns:repeat(3,1fr)}.featured{grid-template-columns:1fr}.nav-links{display:none}.banner{height:390px}}
   @media(max-width:720px){.items{grid-template-columns:1fr 1fr}}
   @media(max-width:520px){.items{grid-template-columns:1fr}.soc-left{width:100%}}
+  /* modal header on phones: nav + close on one row, crumb drops to its own truncated line */
+  @media (max-width:560px){
+    .modal-overlay{padding:10px}
+    .modal-top{flex-wrap:wrap;gap:10px;padding:12px 14px}
+    .modal-nav .navbtn{width:32px;height:32px}
+    .modal-nav #posLabel{font-size:11.5px}
+    .modal-close{margin-left:auto;width:34px;height:34px}
+    .crumb-m{order:9;flex-basis:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-top:10px;border-top:1px solid var(--border)}
+  }
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="siteNav">
   <div class="wrap nav-in">
     <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
-    <div class="nav-links">
-      <a href="#">Discover</a>
-      <a href="#">Starred</a>
-      <a href="#">Pricing</a>
-      <a href="#">FAQ</a>
-    </div>
     <div class="nav-right">
-      <a class="btn btn-sm" href="#">Sign in</a>
-      <a class="btn btn-primary btn-sm" href="#">Start your collection</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i data-lucide="moon" class="ic-moon"></i><i data-lucide="sun" class="ic-sun"></i></button>
+      <a class="nav-login" href="#">Log in</a>
+      <a class="btn btn-primary btn-sm" href="#">Register</a>
+      <button class="mobile-burger" id="mobileBurger" aria-label="Open menu"><i data-lucide="menu"></i></button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#featured">Featured grail</a>
+    <a href="#recent">Recent additions</a>
+    <a href="#owner">Owner</a>
+    <a href="#copy">Copy this collection</a>
+    <div class="mp-auth">
+      <a class="btn btn-sm" href="#">Log in</a>
+      <a class="btn btn-primary btn-sm" href="#">Register</a>
     </div>
   </div>
 </nav>
@@ -217,7 +391,7 @@
     <h1 class="g-name">Jordan Wall — 38 Pairs</h1>
     <div class="g-by">
       <span>by <a class="owner" href="#">@solecollector</a></span>
-      <span class="prem">✦ Premium</span>
+      <span class="prem">✦ PRO</span>
       <span>· 38 items · sneakers &amp; heat</span>
     </div>
     <p class="g-desc">Retro 1s through 14s with box condition, size runs and resale notes. Four grails and counting — every pair has a story.</p>
@@ -230,68 +404,105 @@
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="mainContent">
   <!-- social bar -->
   <div class="social reveal">
     <div class="soc-left">
-      <span>👁 <b>18,640</b> views</span><span class="sep">·</span>
-      <span>copied from <a href="#" style="color:var(--primary);font-weight:700">@kicksfinder</a>'s "Retro Wall"</span>
+      <span><i data-lucide="eye" class="il"></i> <b>18,640</b> views</span><span class="sep">·</span>
+      <span>Copied from <a href="#" style="color:var(--primary);font-weight:700">@kicksfinder</a>'s "Retro Wall"</span>
     </div>
     <div class="soc-right">
-      <button class="stat-chip" id="starBtn"><span class="ic">☆</span> Star <span class="n" id="starCount">986</span></button>
-      <button class="stat-chip" id="copyBtn"><span class="ic">↗</span> Copy <span class="n" id="copyCount">241</span></button>
-      <button class="btn-share" id="shareBtn">🔗 Share</button>
+      <button class="stat-chip" id="starBtn" aria-label="Star collection"><i data-lucide="star"></i><span class="lbl"> Star </span><span class="n" id="starCount">986</span></button>
+      <button class="stat-chip" id="copyBtn" aria-label="Copy collection"><i data-lucide="copy"></i><span class="lbl"> Copy collection </span><span class="n" id="copyCount">241</span></button>
+      <button class="btn-share" id="shareBtn" aria-label="Share collection"><i data-lucide="link"></i><span class="lbl"> Share</span></button>
     </div>
   </div>
 
+  <!-- Pro upsell (mock): one dismissible strip for free/anon viewers when a gallery uses Pro features (accent/effects/layout). Real = upgrade-prompt → ROUTES.pricing. -->
+  <div class="upsell reveal" id="upsell" role="region" aria-label="Pro feature">
+    <i data-lucide="sparkles"></i>
+    <p><b>This gallery is Pro-styled.</b> Accent colours, effects &amp; layouts are Pro features — make your own collection stand out too.</p>
+    <a class="btn" href="#">View Pro</a>
+    <button class="upsell-x" id="upsellClose" aria-label="Dismiss"><i data-lucide="x"></i></button>
+  </div>
+
   <!-- featured -->
-  <div class="featured reveal">
+  <div class="featured reveal" id="featured">
     <div class="art">
       <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=1100&q=70&auto=format&fit=crop" alt="Featured item — the grail">
-      <span class="f-flag">★ Featured</span>
+      <span class="f-flag"><i data-lucide="star"></i> Featured</span>
     </div>
     <div class="body">
       <span class="kicker kicker2">Featured grail</span>
       <h3>Air Jordan 4 Retro — "Bred" 2019</h3>
       <p class="sub">The pair that started the wall. DS, original box and laces, bought on release day for retail — and still the crown jewel.</p>
       <div class="f-row">
-        <span class="fchip">📏 <b>UK 9.5</b></span>
-        <span class="fchip">📦 <b>DS · OG box</b></span>
-        <span class="fchip">🗓️ <b>2019</b></span>
-        <span class="fchip">💷 <b>Retail: £175</b></span>
+        <span class="fchip"><b>UK 9.5</b></span>
+        <span class="fchip"><b>DS · OG box</b></span>
+        <span class="fchip"><b>2019</b></span>
+        <span class="fchip"><b>Retail: £175</b></span>
       </div>
-      <button class="btn" id="itemStar1">☆ View item</button>
+      <button class="btn" id="itemStar1"><i data-lucide="star"></i> View item</button>
     </div>
   </div>
 
   <!-- shelf header + view toggle -->
-  <div class="shelf-head reveal">
+  <div class="shelf-head reveal" id="recent">
     <div class="title">
       <h2>Recent additions</h2>
       <p>9 fields · custom template by @solecollector</p>
     </div>
-    <div class="view-toggle">
-      <button>Grid</button>
-      <button class="active">Cards</button>
-      <button>Table</button>
-      <button>Showcase</button>
+    <!-- Mock-only affordance: visitor layout toggle. NOT a live feature — layout is owner-set in collection settings (GalleryLayout on Template / gallery-theme-modal). -->
+    <div class="view-toggle" role="group" aria-label="Gallery layout">
+      <button data-layout="grid">Grid</button>
+      <button class="active" data-layout="cards" aria-pressed="true">Cards</button>
+      <button data-layout="table">Table</button>
+      <button data-layout="showcase">Showcase</button>
+    </div>
+  </div>
+
+<!-- Mock note (cards view = real TradingCard parity): the default Cards layout renders full-bleed 3/4 covers with an accent/muted title plate — no value chips, no DS/VNDS pill, no per-item star. Those remain only as simplified placeholders in the other layouts. The old top-right DS/VNDS pill concept is parked: it would need a new per-field owner "highlight/badge" flag (does not exist yet); per-item stars have no data model (stars are collection-level). -->
+
+  <!-- Mock-only preview controls: effects + accent. Real behaviour = owner-set collection settings (theme modal); like the layout toggle, these do NOT imply a visitor feature. -->
+  <div class="fx-bar reveal">
+    <span class="fx-label">Effects</span>
+    <div class="fx-toggle" role="group" aria-label="Card effects preview">
+      <button class="active" data-effect="" aria-pressed="true">None</button>
+      <button data-effect="zoom">Zoom</button>
+      <button data-effect="holo">Holo</button>
+      <button data-effect="tilt">Tilt</button>
+    </div>
+    <span class="fx-label">Accent</span>
+    <div class="fx-swatches" role="group" aria-label="Accent colour preview">
+      <button class="sw sw-def active" data-accent="" aria-pressed="true"></button>
+      <button class="sw" data-accent="#3b82f6"></button>
+      <button class="sw" data-accent="#6366f1"></button>
+      <button class="sw" data-accent="#8b5cf6"></button>
+      <button class="sw" data-accent="#ec4899"></button>
+      <button class="sw" data-accent="#f43f5e"></button>
+      <button class="sw" data-accent="#f97316"></button>
+      <button class="sw" data-accent="#f59e0b"></button>
+      <button class="sw" data-accent="#10b981"></button>
+      <button class="sw" data-accent="#14b8a6"></button>
+      <button class="sw" data-accent="#06b6d4"></button>
     </div>
   </div>
 
   <!-- items grid -->
-  <div class="items" id="items">
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini on">★</button></div><div class="meta"><div class="t-title">Nike Air Max 1 "Sunset"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £120</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Puma Suede Classic</div><div class="t-sub">US 9.5 · 1980s reissue</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 9.5</span><span class="field-chip">💷 £65</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1539185441755-769473a23570?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">New Balance 990v3 "Olive"</div><div class="t-sub">US 10.5 · 2022</div><div class="t-fields"><span class="field-chip accent">✨ VNDS</span><span class="field-chip">📏 US 10.5</span><span class="field-chip">💷 £180</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Nike Dunk Low "Blue Chill"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £95</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">NB 574 "Grey Day"</div><div class="t-sub">US 9 · 2020</div><div class="t-fields"><span class="field-chip accent">✨ VNDS</span><span class="field-chip">📏 US 9</span><span class="field-chip">💷 £85</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Vans Old Skool "Maroon"</div><div class="t-sub">US 10.5 · 2019</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10.5</span><span class="field-chip">💷 £60</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Air Max 95 "Neon" 2020</div><div class="t-sub">US 10 · 2020</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 10</span><span class="field-chip">💷 £140</span></div></div></div>
-    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span><button class="star-mini">☆</button></div><div class="meta"><div class="t-title">Jordan 1 High "Court"</div><div class="t-sub">US 9.5 · 2021</div><div class="t-fields"><span class="field-chip accent">📦 DS</span><span class="field-chip">📏 US 9.5</span><span class="field-chip">💷 £165</span></div></div></div>
+
+  <div class="items view-cards" id="items">
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Nike Air Max 1 "Sunset"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 10</span><span class="field-chip">£120</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Puma Suede Classic</div><div class="t-sub">US 9.5 · 1980s reissue</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 9.5</span><span class="field-chip">£65</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1539185441755-769473a23570?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span></div><div class="meta"><div class="t-title">New Balance 990v3 "Olive"</div><div class="t-sub">US 10.5 · 2022</div><div class="t-fields"><span class="field-chip">VNDS</span><span class="field-chip">US 10.5</span><span class="field-chip">£180</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Nike Dunk Low "Blue Chill"</div><div class="t-sub">US 10 · 2021</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 10</span><span class="field-chip">£95</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">VNDS</span></div><div class="meta"><div class="t-title">NB 574 "Grey Day"</div><div class="t-sub">US 9 · 2020</div><div class="t-fields"><span class="field-chip">VNDS</span><span class="field-chip">US 9</span><span class="field-chip">£85</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Vans Old Skool "Maroon"</div><div class="t-sub">US 10.5 · 2019</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 10.5</span><span class="field-chip">£60</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Air Max 95 "Neon" 2020</div><div class="t-sub">US 10 · 2020</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 10</span><span class="field-chip">£140</span></div></div></div>
+    <div class="item reveal"><div class="art"><img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=520&q=65&auto=format&fit=crop" alt=""><span class="cond">DS</span></div><div class="meta"><div class="t-title">Jordan 1 High "Court"</div><div class="t-sub">US 9.5 · 2021</div><div class="t-fields"><span class="field-chip">DS</span><span class="field-chip">US 9.5</span><span class="field-chip">£165</span></div></div></div>
   </div>
 
   <!-- owner -->
-  <div class="owner-strip reveal">
+  <div class="owner-strip reveal" id="owner">
     <div class="av">S</div>
     <div class="who">
       <b>solecollector</b>
@@ -299,45 +510,55 @@
       <div class="lineage">↳ Copied from <a href="#">@kicksfinder</a>'s "Retro Wall" · lineage tracked</div>
     </div>
     <a class="btn" href="#">View profile</a>
-    <button class="btn" id="followBtn">Follow</button>
   </div>
 
   <!-- copy cta -->
-  <div class="copy-band reveal">
+  <div class="copy-band reveal" id="copy">
     <div class="copy-box">
       <h2>Love this wall? Make it yours.</h2>
-      <p>Copy the whole template — fields, structure and public items — then build your own from a head start.</p>
+      <p>Copy the whole collection — fields, structure and public items — then build your own from a head start.</p>
       <button class="btn" id="copyCta">↗ Copy this collection</button>
     </div>
   </div>
 </main>
 
 <footer>
-  <div class="wrap foot-in">
-    <a class="logo" style="font-size:20px" href="#"><span class="mark" style="width:28px;height:28px"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
-    <div class="foot-links"><a href="#">Discover</a><a href="#">Pricing</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Contact</a></div>
-    <div class="foot-legal">© 2026 collectd · Satiate Studio Ltd</div>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="logo" href="#"><span class="mark"><i></i><i></i></span><span>co<span class="ll">ll</span>ectd</span></a>
+      <p>The community-driven hub for collectors and fans.</p>
+    </div>
+    <div class="foot-col"><h3>Explore</h3><a href="#">Discover</a><a href="#">Pricing</a></div>
+    <div class="foot-col"><h3>Account</h3><a href="#">Log in</a><a href="#">Register</a></div>
+    <div class="foot-col"><h3>Support</h3><a href="#">Contact</a></div>
+    <div class="foot-col"><h3>Legal</h3><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Refund Policy</a></div>
   </div>
+  <div class="foot-legal">© 2026 Collectd · Satiate Studio Ltd</div>
 </footer>
 
-<!-- Item detail modal -->
+<!-- Item detail modal.
+     PLANNED DIRECTION (Damian): keep the item MODAL, drop dedicated item pages; deep links auto-open the modal via a querystring (e.g. ?item=<id>).
+     Multi-image support below is a mock simulation (crops of the single photo) — real data is the ItemImage model list.
+     Report item = existing ReportButton/ReportDialog (ContentReport); "Open full page" removed — dedicated item pages are dropped (see plan). -->
 <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-top">
       <div class="modal-nav">
-        <button class="navbtn" id="prevBtn" aria-label="Previous item">‹</button>
+        <button class="navbtn" id="prevBtn" aria-label="Previous item"><i data-lucide="chevron-left"></i></button>
         <span id="posLabel">1 of 38</span>
-        <button class="navbtn" id="nextBtn" aria-label="Next item">›</button>
+        <button class="navbtn" id="nextBtn" aria-label="Next item"><i data-lucide="chevron-right"></i></button>
       </div>
       <div class="crumb-m"><a href="#">@solecollector</a><span class="sep">/</span><span>Jordan Wall</span><span class="sep">·</span><span id="modalPos">Recent additions</span></div>
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <button class="modal-close" id="modalClose" aria-label="Close"><i data-lucide="x"></i></button>
     </div>
     <div class="modal-body">
       <div class="modal-art">
         <img class="main" id="mImg" src="" alt="">
+        <button class="img-arrow prev" id="imgPrev" aria-label="Previous photo" hidden><i data-lucide="chevron-left"></i></button>
+        <button class="img-arrow next" id="imgNext" aria-label="Next photo" hidden><i data-lucide="chevron-right"></i></button>
         <span class="cond-big" id="mCond">DS</span>
         <span class="img-count" id="mCount">1/1</span>
-        <button class="star-big" id="mStar">☆</button>
+        <button class="star-big" id="mStar" aria-label="Star item"><i data-lucide="star"></i></button>
       </div>
       <div class="modal-info">
         <span class="mi-kicker" id="mKicker">Sneaker · #4 grail</span>
@@ -353,8 +574,8 @@
           <div class="mi-row"><span class="lbl">Story</span><span class="val" id="fAcq">Release-day raffle win</span></div>
         </div>
         <div class="mi-actions">
-          <button class="btn" id="mShare">🔗 Share item</button>
-          <button class="btn" id="mOpen">Open full page ↗</button>
+          <button class="btn" id="mShare"><i data-lucide="link"></i> Share item</button>
+          <button class="btn" id="mReport"><i data-lucide="flag"></i> Report item</button>
         </div>
       </div>
     </div>
@@ -372,8 +593,8 @@
   // star toggles
   const starBtn=document.getElementById('starBtn'), starCount=document.getElementById('starCount')
   let starred=false, stars=986
-  starBtn.addEventListener('click',()=>{starred=!starred;stars+=starred?1:-1;starBtn.classList.toggle('on',starred);starBtn.querySelector('.ic').textContent=starred?'★':'☆';starCount.textContent=stars.toLocaleString();toast(starred?'Starred — nice pick':'Unstarred')})
-  document.querySelectorAll('.star-mini').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.classList.toggle('on');b.textContent=b.classList.contains('on')?'★':'☆'}))
+  starBtn.addEventListener('click',()=>{starred=!starred;stars+=starred?1:-1;starBtn.classList.toggle('on',starred);starCount.textContent=stars.toLocaleString();toast(starred?'Starred — nice pick':'Unstarred')})
+  document.querySelectorAll('.star-mini').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.classList.toggle('on')}))
 
   // ---------- item detail modal ----------
   const DETAILS={
@@ -406,10 +627,35 @@
   const overlay=document.getElementById('modalOverlay')
   const el={img:document.getElementById('mImg'),cond:document.getElementById('mCond'),count:document.getElementById('mCount'),kicker:document.getElementById('mKicker'),title:document.getElementById('modalTitle'),sub:document.getElementById('mSub'),story:document.getElementById('mStory'),fCond:document.getElementById('fCond'),fSize:document.getElementById('fSize'),fYear:document.getElementById('fYear'),fRetail:document.getElementById('fRetail'),fMarket:document.getElementById('fMarket'),fAcq:document.getElementById('fAcq'),pos:document.getElementById('posLabel'),mPos:document.getElementById('modalPos'),star:document.getElementById('mStar')}
 
+  const imgPrevBtn=document.getElementById('imgPrev'), imgNextBtn=document.getElementById('imgNext')
+  let imageIdx=0, imageList=[]
+  function buildImageList(src){
+    // Mock simulation of ItemImage support: same photo re-cropped to suggest extra angles.
+    return [
+      {src:src,pos:'center',zoom:1},
+      {src:src,pos:'50% 18%',zoom:1.9},
+      {src:src,pos:'64% 58%',zoom:1.5},
+    ]
+  }
+  function renderImage(){
+    const im=imageList[imageIdx]
+    el.img.src=im.src
+    el.img.style.objectPosition=im.pos
+    el.img.style.transform=im.zoom&&im.zoom!==1?`scale(${im.zoom})`:'none'
+    const p=im.pos.split(' ')
+    el.img.style.transformOrigin=(p[0]||'50%')+' '+(p[1]||'50%')
+    el.count.textContent=(imageIdx+1)+'/'+imageList.length
+    imgPrevBtn.hidden=imageIdx<=0
+    imgNextBtn.hidden=imageIdx>=imageList.length-1
+  }
+  function imageStep(d){imageIdx=(imageIdx+d+imageList.length)%imageList.length;renderImage()}
+  imgPrevBtn.addEventListener('click',e=>{e.stopPropagation();imageStep(-1)})
+  imgNextBtn.addEventListener('click',e=>{e.stopPropagation();imageStep(1)})
   function fillEntry(i){
     entryIdx=((i%entries.length)+entries.length)%entries.length
     const e=entries[entryIdx]
-    el.img.src=e.img; el.img.alt=e.title
+    imageIdx=0; imageList=buildImageList(e.img)
+    el.img.alt=e.title
     el.cond.textContent=e.cond
     el.kicker.textContent=e.kicker
     el.title.textContent=e.title
@@ -419,7 +665,8 @@
     el.fRetail.textContent=e.retail; el.fMarket.textContent=e.market; el.fAcq.textContent=e.acq
     el.pos.textContent=entryIdx===0?'Featured grail':e.pos
     el.mPos.textContent=entryIdx===0?'Featured grail':'Recent additions'
-    el.star.textContent=mStarred?'★':'☆'; el.star.classList.toggle('on',mStarred)
+    el.star.classList.toggle('on',mStarred)
+    renderImage()
     overlay.querySelector('.modal-body').scrollTop=0
   }
   function openModal(i){fillEntry(i);overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
@@ -435,24 +682,45 @@
   document.addEventListener('keydown',e=>{
     if(!overlay.classList.contains('open'))return
     if(e.key==='Escape')closeModal()
-    if(e.key==='ArrowLeft')fillEntry(entryIdx-1)
-    if(e.key==='ArrowRight')fillEntry(entryIdx+1)
+    if(e.key==='ArrowLeft')imageStep(-1)
+    if(e.key==='ArrowRight')imageStep(1)
   })
-  el.star.addEventListener('click',()=>{mStarred=!mStarred;el.star.textContent=mStarred?'★':'☆';el.star.classList.toggle('on',mStarred);toast(mStarred?'Item starred':'Item unstarred')})
+  el.star.addEventListener('click',()=>{mStarred=!mStarred;el.star.classList.toggle('on',mStarred);toast(mStarred?'Item starred':'Item unstarred')})
   document.getElementById('mShare').addEventListener('click',()=>toast('Mockup — would share this item'))
-  document.getElementById('mOpen').addEventListener('click',()=>toast('Mockup — would open the full item page'))
+  document.getElementById('mReport').addEventListener('click',()=>{const b=document.getElementById('mReport');b.classList.add('reported');b.disabled=true;toast('Mockup — opens the existing ReportDialog')})
+  document.getElementById('upsellClose').addEventListener('click',()=>{document.getElementById('upsell').hidden=true})
 
   // copy / share
   let copied=false, copies=241
-  document.getElementById('copyBtn').addEventListener('click',()=>{copied=!copied;copies+=copied?1:-1;document.getElementById('copyCount').textContent=copies;toast(copied?'Collection copied to your account ✓':'Removed copy')})
+  document.getElementById('copyBtn').addEventListener('click',()=>{copied=!copied;copies+=copied?1:-1;document.getElementById('copyCount').textContent=copies;toast(copied?'Collection copied to your account':'Removed copy')})
   document.getElementById('copyCta').addEventListener('click',()=>toast('Mockup — would open signup / copy flow'))
-  document.getElementById('shareBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://collectd.io/u/solecollector/jordan-wall');toast('Link copied to clipboard ✓')}catch(e){toast('Mockup — would copy https://collectd.io/u/solecollector/jordan-wall')}})
-  document.getElementById('followBtn').addEventListener('click',function(){const f=this.textContent==='Follow';this.textContent=f?'Following ✓':'Follow';this.classList.toggle('btn-primary',f);toast(f?'Following @solecollector':'Unfollowed')})
+  document.getElementById('shareBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://collectd.io/u/solecollector/jordan-wall');toast('Link copied to clipboard')}catch(e){toast('Mockup — would copy https://collectd.io/u/solecollector/jordan-wall')}})
 
-  // view toggle feint
-  document.querySelectorAll('.view-toggle button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.view-toggle button').forEach(x=>x.classList.remove('active'));b.classList.add('active');toast('Mockup — '+b.textContent+' layout')})})
+
+  // theme + mobile menu
+  const root=document.documentElement
+  const urlT=new URLSearchParams(location.search).get('theme')
+  if(urlT==='dark'||(!urlT&&localStorage.getItem('cdt')==='dark'))root.classList.add('dark')
+  document.getElementById('themeToggle').addEventListener('click',()=>{root.classList.toggle('dark');localStorage.setItem('cdt',root.classList.contains('dark')?'dark':'light')})
+  const siteNav=document.getElementById('siteNav')
+  document.getElementById('mobileBurger').addEventListener('click',()=>{siteNav.classList.toggle('open');document.getElementById('mobileBurger').setAttribute('aria-expanded',String(siteNav.classList.contains('open')))})
+
+  // view toggle — actually switches layout
+  const itemsBox=document.getElementById('items')
+  document.querySelectorAll('.view-toggle button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.view-toggle button').forEach(x=>{x.classList.remove('active');x.removeAttribute('aria-pressed')});b.classList.add('active');b.setAttribute('aria-pressed','true');['view-grid','view-cards','view-table','view-showcase'].forEach(c=>itemsBox.classList.remove(c));itemsBox.classList.add('view-'+b.dataset.layout)})})
+  // effects + accent previews (mock-only — mirrors owner-set theme controls)
+  const fxItems=document.getElementById('items')
+  document.querySelectorAll('.fx-toggle button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fx-toggle button').forEach(x=>{x.classList.remove('active');x.removeAttribute('aria-pressed')});b.classList.add('active');b.setAttribute('aria-pressed','true');fxItems.classList.remove('fx-zoom','fx-holo','fx-tilt');const fx=b.dataset.effect;if(fx)fxItems.classList.add('fx-'+fx)})})
+  const accentRoot=document.getElementById('mainContent').style
+  const rootAccent=document.documentElement.style
+  const swClear=x=>{x.classList.remove('active');x.removeAttribute('aria-pressed')}
+  const setAccent=el=>{document.querySelectorAll('.fx-swatches .sw').forEach(swClear);el.classList.add('active');el.setAttribute('aria-pressed','true');const c=el.dataset.accent;if(c){accentRoot.setProperty('--primary',c);accentRoot.setProperty('--primary-2',c);accentRoot.setProperty('--primary-ink',c);rootAccent.setProperty('--accent-bar',c);document.documentElement.classList.add('accent-on')}else{accentRoot.removeProperty('--primary');accentRoot.removeProperty('--primary-2');accentRoot.removeProperty('--primary-ink');rootAccent.removeProperty('--accent-bar');document.documentElement.classList.remove('accent-on')}}
+  document.querySelectorAll('.fx-swatches .sw').forEach(el=>el.addEventListener('click',()=>setAccent(el)))
+
   // generic cta feints
-  document.querySelectorAll('nav .btn, .owner-strip .btn:not(#followBtn)').forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();toast('Mockup — nav link')})})
+  document.querySelectorAll('nav .btn, nav .nav-login, .owner-strip .btn, .foot-col a, .crumb a').forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();toast('Mockup — link/action')})})
 </script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>try{lucide.createIcons()}catch(e){}</script>
 </body>
 </html>
